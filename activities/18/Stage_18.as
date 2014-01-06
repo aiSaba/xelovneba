@@ -19,13 +19,18 @@
 		
 		private var naturmortArray:Array;
 		private var arcArray:Array;
+		private var graphArray:Array;
+		private var portArray:Array;
 		
+		private var RandomArray:Array;
 		private var RandomIndexArray:Array;
 		
-		private var NatRandom_1:int;
+		private var NatRandom:int;
 		private var ArcRandom:int;
-		private var NatRandom_3:int;
-		private var NatRandom_4:int;
+		private var GraphRandom:int;
+		private var PortRandom:int;
+		private var FirstRandom:int;
+		private var SecondRandom:int;
 		
 		private var nat_1:MovieClip;
 		private var nat_2:MovieClip;
@@ -46,6 +51,29 @@
 		private var arc_7:MovieClip;
 		private var arc_8:MovieClip;
 		private var arc_9:MovieClip;
+		
+		
+		private var graph_1:MovieClip;
+		private var graph_2:MovieClip;
+		private var graph_3:MovieClip;
+		private var graph_4:MovieClip;
+		private var graph_5:MovieClip;
+		private var graph_6:MovieClip;
+		private var graph_7:MovieClip;
+		private var graph_8:MovieClip;
+		private var graph_9:MovieClip;
+		
+		
+		private var port_1:MovieClip;
+		private var port_2:MovieClip;
+		private var port_3:MovieClip;
+		private var port_4:MovieClip;
+		private var port_5:MovieClip;
+		private var port_6:MovieClip;
+		private var port_7:MovieClip;
+		private var port_8:MovieClip;
+		private var port_9:MovieClip;
+		
 		
 		public function Stage_18(_stageWidth:Number = 1024, _stageHeight:Number = 768)
 		{
@@ -86,45 +114,141 @@
 			arc_8 = new Arc_8();
 			arc_9 = new Arc_9();
 			
-			naturmortArray = [nat_1, nat_2, nat_3, nat_4, nat_5, nat_6, nat_7, nat_8, nat_9]
-			arcArray = [arc_1, arc_2, arc_3, arc_4, arc_5, arc_6, arc_7, arc_8, arc_9]
+			
+			graph_1 = new Graph_1();
+			graph_2 = new Graph_2();
+			graph_3 = new Graph_3();
+			graph_4 = new Graph_4();
+			graph_5 = new Graph_5();
+			graph_6 = new Graph_6();
+			graph_7 = new Graph_7();
+			graph_8 = new Graph_8();
+			graph_9 = new Graph_9();
+			
+			port_1 = new Port_1();
+			port_2 = new Port_2();
+			port_3 = new Port_3();
+			port_4 = new Port_4();
+			port_5 = new Port_5();
+			port_6 = new Port_6();
+			port_7 = new Port_7();
+			port_8 = new Port_8();
+			port_9 = new Port_9();
+			
+			naturmortArray = [nat_1, nat_2, nat_3, nat_4, nat_5, nat_6, nat_7, nat_8, nat_9];
+			arcArray = [arc_1, arc_2, arc_3, arc_4, arc_5, arc_6, arc_7, arc_8, arc_9];
+			graphArray = [graph_1, graph_2, graph_3, graph_4, graph_5, graph_6, graph_7, graph_8, graph_9];
+			portArray = [port_1, port_2, port_3, port_4, port_5, port_6, port_7, port_8, port_9];
 			
 			randomPlus = new RandomPlus(8);
-			NatRandom_1 = randomPlus.getNum();
-			trace (NatRandom_1)
+			NatRandom = randomPlus.getNum();
+			
 			
 			randomPlus = new RandomPlus(8);
 			ArcRandom = randomPlus.getNum();
-			trace (ArcRandom)
+			
 			
 			randomPlus = new RandomPlus(8);
-			NatRandom_3 = randomPlus.getNum();
-			trace (NatRandom_3)
+			GraphRandom = randomPlus.getNum();
+			
 			
 			randomPlus = new RandomPlus(8);
-			NatRandom_4 = randomPlus.getNum();
-			trace (NatRandom_4)
+			PortRandom = randomPlus.getNum();
 			
-			addObject(NatRandom_1, ArcRandom, NatRandom_3, NatRandom_4);
+			First_SecondMIx();
+			choosingFunc(FirstRandom, SecondRandom);
+
+			
+			//addObject(NatRandom, ArcRandom, GraphRandom, PortRandom);
+			//trace (allObjects.Fullwidth.width)
+		}
+		
+		private function First_SecondMIx ():void
+		{
+			////  masivebis asarevad....
+			randomPlus = new RandomPlus(3);
+			FirstRandom = randomPlus.getNum();
+			trace  (FirstRandom)
+			
+			randomPlus = new RandomPlus(3);
+			SecondRandom = randomPlus.getNum();
+			trace (SecondRandom)
+			/////
+			
+			if (FirstRandom == SecondRandom)
+			{
+				First_SecondMIx();
+			}
 			
 		}
 		
+		
+		// irchevs    4 masividan romeli   2 is elementebi daideba ekranze
 
+		private function  choosingFunc (FirstArray , SecondArray):void
+		
+		{
+			RandomArray = [naturmortArray, arcArray, graphArray, portArray]
+			
+			
+			for (var i:int = 0; i < RandomArray [FirstArray].length; i++ )
+			{
+				RandomArray [FirstArray][i]
+			}
+			
+			
+			
+			
+			RandomArray [SecondArray][0]
+			
+			
+			
+			
+		}
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		/// function romelsac gadaecema  4  mc , itvlis da  kribavs suratebis zomebs (mxolod x gerdzis(width), radgan y mudmivia)  , jams  adarebs   charchos zomas da debs im shemtxvevashi tu eteva.
 		private function addObject(RandomIndex_1, RandomIndex_2, RandomIndex_3, RandomIndex_4):void
 		{
-			RandomIndexArray = [RandomIndex_1, RandomIndex_2, RandomIndex_3, RandomIndex_4]
+			RandomIndexArray = [naturmortArray[RandomIndex_1], arcArray[RandomIndex_2], graphArray[RandomIndex_3], portArray[RandomIndex_4]]
 			
 			for (var i:int = 0; i < RandomIndexArray.length; i++ )
 			{
-			naturmortArray[RandomIndexArray[i]].x = _stageWidth / 2 + allObjects.Xpos_mc.x +20 ;
-			naturmortArray[RandomIndexArray[i]].y = _stageHeight / 2 - 14.5;
-			naturmortArray[RandomIndexArray[i]].height = 207.75 //_stageHeight / 4.5;
-			naturmortArray[RandomIndexArray[i]].scaleX = naturmortArray[RandomIndexArray[i]].scaleY;
-			trace (naturmortArray[RandomIndexArray[i]].x)
-			addChild (naturmortArray[RandomIndexArray[i]])
-			trace ("dado" + i)
+				
+				
+				
+			RandomIndexArray[i].x = _stageWidth / 2 + allObjects.Xpos_mc.x +75*i ;
+			RandomIndexArray[i].y = _stageHeight / 2 - 14.5;
+			RandomIndexArray[i].height = 207.75 //_stageHeight / 4.5;
+			RandomIndexArray[i].scaleX = RandomIndexArray[i].scaleY;
+						if (RandomIndexArray[0].x + RandomIndexArray[1].x + RandomIndexArray[2].x +RandomIndexArray[3].x  > allObjects.Fullwidth.width)
+			{
+				addObject(NatRandom, ArcRandom, GraphRandom, PortRandom);
+				break
+			trace ("good")
+			
+			}
+			addChild(RandomIndexArray[i])
+			
 			}
 			
+			trace (RandomIndexArray[0].x)
+			trace (RandomIndexArray[1].x)
+			trace (RandomIndexArray[2].x)
+			trace (RandomIndexArray[3].x)
+			trace ("amati jamia:")
+			trace (RandomIndexArray[0].x + RandomIndexArray[1].x + RandomIndexArray[2].x + RandomIndexArray[3].x)
+			trace ("sul:")
+			trace (RandomIndexArray[0].x + RandomIndexArray[1].x + RandomIndexArray[2].x + RandomIndexArray[3].x + 50 * 4)
 			
 		}
 
