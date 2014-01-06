@@ -172,8 +172,16 @@
 			{
 				randomPlus = new RandomPlus(8);
 				FirstRandomObject = randomPlus.getNum();
+				
 				FinalArray.push(RandomArray[FirstArray][FirstRandomObject])
-				trace(FinalArray)
+				if (i>0){
+					if (FinalArray[i-1].name == FinalArray[i].name ) 
+					{
+						trace ("ganmeorda...")
+						//break
+					}
+				}
+				
 			}
 			
 			FinalArray.push(RandomArray[SecondArray][SecondRandom])
