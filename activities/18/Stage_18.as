@@ -1,6 +1,6 @@
 ﻿package
 {
-
+	
 	import com.greensock.*;
 	import com.greensock.easing.*;
 	import flash.display.*;
@@ -16,26 +16,20 @@
 		private var randomPlus:RandomPlus;
 		private var soundControl:SoundControl;
 		
-		
 		private var naturmortArray:Array;
 		private var arcArray:Array;
 		private var graphArray:Array;
 		private var portArray:Array;
-		private var FinalArray:Array = new Array();;
+		private var FinalArray:Array = new Array();
+		
 		
 		private var RandomArray:Array;
 		private var RandomIndexArray:Array;
 		
-		private var NatRandom:int;
-		private var ArcRandom:int;
-		private var GraphRandom:int;
-		private var PortRandom:int;
 		private var FirstRandom:int;
 		private var SecondRandom:int;
 		private var FirstRandomObject:int;
 		private var SecondRandomObject:int;
-		
-		
 		
 		private var nat_1:MovieClip;
 		private var nat_2:MovieClip;
@@ -57,7 +51,6 @@
 		private var arc_8:MovieClip;
 		private var arc_9:MovieClip;
 		
-		
 		private var graph_1:MovieClip;
 		private var graph_2:MovieClip;
 		private var graph_3:MovieClip;
@@ -68,7 +61,6 @@
 		private var graph_8:MovieClip;
 		private var graph_9:MovieClip;
 		
-		
 		private var port_1:MovieClip;
 		private var port_2:MovieClip;
 		private var port_3:MovieClip;
@@ -78,7 +70,6 @@
 		private var port_7:MovieClip;
 		private var port_8:MovieClip;
 		private var port_9:MovieClip;
-		
 		
 		public function Stage_18(_stageWidth:Number = 1024, _stageHeight:Number = 768)
 		{
@@ -95,10 +86,9 @@
 		
 		private function allFunc():void
 		{
-
-
+			
 			addStage();
-
+			
 			nat_1 = new Nat_1();
 			nat_2 = new Nat_2();
 			nat_3 = new Nat_3();
@@ -118,7 +108,6 @@
 			arc_7 = new Arc_7();
 			arc_8 = new Arc_8();
 			arc_9 = new Arc_9();
-			
 			
 			graph_1 = new Graph_1();
 			graph_2 = new Graph_2();
@@ -145,121 +134,99 @@
 			graphArray = [graph_1, graph_2, graph_3, graph_4, graph_5, graph_6, graph_7, graph_8, graph_9];
 			portArray = [port_1, port_2, port_3, port_4, port_5, port_6, port_7, port_8, port_9];
 			
-			randomPlus = new RandomPlus(8);
-			NatRandom = randomPlus.getNum();
-			
-			
-			randomPlus = new RandomPlus(8);
-			ArcRandom = randomPlus.getNum();
-			
-			
-			randomPlus = new RandomPlus(8);
-			GraphRandom = randomPlus.getNum();
-			
-			
-			randomPlus = new RandomPlus(8);
-			PortRandom = randomPlus.getNum();
-			
 			First_SecondMIx();
 			
 			choosingFunc(FirstRandom, SecondRandom);
-
 			
 			addObject(FinalArray[0], FinalArray[1], FinalArray[2], FinalArray[3]);
-			//addObject(NatRandom, ArcRandom, GraphRandom, PortRandom);
-			
+		
 		}
 		
-		private function First_SecondMIx ():void
+		private function First_SecondMIx():void
 		{
 			////  masivebis asarevad....
 			randomPlus = new RandomPlus(3);
 			FirstRandom = randomPlus.getNum();
-			trace  (FirstRandom)
+			trace(FirstRandom)
 			
 			randomPlus = new RandomPlus(3);
 			SecondRandom = randomPlus.getNum();
-			trace (SecondRandom)
+			trace(SecondRandom)
 			/////
 			
 			if (FirstRandom == SecondRandom)
 			{
 				First_SecondMIx();
 			}
-			
+		
 		}
 		
-		
 		// irchevs    4 masividan romeli   2 is elementebi daideba ekranze
-
-		private function  choosingFunc (FirstArray , SecondArray):void
+		
+		private function choosingFunc(FirstArray, SecondArray):void
 		
 		{
 			RandomArray = [naturmortArray, arcArray, graphArray, portArray]
 			
-			for (var i:int = 0; i < 3; i++ )
+			for (var i:int = 0; i < 3; i++)
 			{
-			randomPlus = new RandomPlus(8);
-			FirstRandomObject = randomPlus.getNum();
-			FinalArray.push (RandomArray [FirstArray][FirstRandomObject])
-			trace (FinalArray)
+				randomPlus = new RandomPlus(8);
+				FirstRandomObject = randomPlus.getNum();
+				FinalArray.push(RandomArray[FirstArray][FirstRandomObject])
+				trace(FinalArray)
 			}
 			
-			FinalArray.push (RandomArray [SecondArray][SecondRandom])
+			FinalArray.push(RandomArray[SecondArray][SecondRandom])
 			
-			trace (FinalArray)
+			trace(FinalArray)
 			// FinalArray aris is rac bolos unda daidos...
-			
+		
 		}
 		
-		
-
 		/// function romelsac gadaecema  4  mc , itvlis da  kribavs suratebis zomebs (mxolod x gerdzis(width), radgan y mudmivia)  , jams  adarebs   charchos zomas da debs im shemtxvevashi tu eteva.
 		private function addObject(RandomIndex_1, RandomIndex_2, RandomIndex_3, RandomIndex_4):void
 		{
 			RandomIndexArray = [RandomIndex_1, RandomIndex_2, RandomIndex_3, RandomIndex_4]
 			
-			for (var i:int = 0; i < RandomIndexArray.length; i++ )
+			for (var i:int = 0; i < RandomIndexArray.length; i++)
 			{
 				
-				
-				
-			RandomIndexArray[i].x = _stageWidth / 2 + allObjects.Xpos_mc.x +30 ;
-			if (i > 0)
-			{
-			RandomIndexArray[i].x = RandomIndexArray[i-1].x  + RandomIndexArray[i-1].width + 30
-			}
-			
-			RandomIndexArray[i].y = _stageHeight / 2 - 14.5;
-			RandomIndexArray[i].height = 207.75 //_stageHeight / 4.5;
-			RandomIndexArray[i].scaleX = RandomIndexArray[i].scaleY;
-			addChild(RandomIndexArray[i])
-				if (RandomIndexArray[0].width + RandomIndexArray[1].width + RandomIndexArray[2].width + RandomIndexArray[3].width + 4*30  > allObjects.Fullwidth.width)
+				RandomIndexArray[i].x = _stageWidth / 2 + allObjects.Xpos_mc.x + 30;
+				if (i > 0)
 				{
-					
-/*					
-			FinalArray.length = 0
-					
-			First_SecondMIx();
-			
-			choosingFunc(FirstRandom, SecondRandom);
-
-			addObject(FinalArray[0], FinalArray[1], FinalArray[2], FinalArray[3]);*/
-			
-					
-					
-					
-					trace ("AR ETEVAAAAAAA")
+					RandomIndexArray[i].x = RandomIndexArray[i - 1].x + RandomIndexArray[i - 1].width + 30
 				}
+				
+				RandomIndexArray[i].y = _stageHeight / 2 - 14.5;
+				RandomIndexArray[i].height = 207.75 //_stageHeight / 4.5;
+				RandomIndexArray[i].scaleX = RandomIndexArray[i].scaleY;
+				
+				
+							if (RandomIndexArray[0].width + RandomIndexArray[1].width + RandomIndexArray[2].width + RandomIndexArray[3].width + 4 * 30 > allObjects.Fullwidth.width)
+			{
+				
+				FinalArray.pop();
+				FinalArray.pop();
+				FinalArray.pop();
+				FinalArray.pop();
+				First_SecondMIx();
+				choosingFunc(FirstRandom, SecondRandom);
+				addObject(FinalArray[0], FinalArray[1], FinalArray[2], FinalArray[3]);
+				
+				trace("AR ETEVAAAAAAA")
+				break
+			}
 				else
 				{
-				addChild(RandomIndexArray[i])
+					addChild(RandomIndexArray[i])
+					
+				
 				}
-			
-			
 			}
-		}
+			trace(allObjects.Fullwidth.width)
+			trace(RandomIndexArray[0].width + RandomIndexArray[1].width + RandomIndexArray[2].width + RandomIndexArray[3].width + 4 * 30)
 
+		}
 		
 		private function addStage():void
 		{
@@ -271,8 +238,6 @@
 			allObjects.scaleX = allObjects.scaleY;
 			allObjects.Xpos_mc.visible = false;
 		}
-		
-
 	
 	}
 
