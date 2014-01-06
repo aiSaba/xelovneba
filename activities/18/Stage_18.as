@@ -224,29 +224,40 @@
 				
 				
 				
-			RandomIndexArray[i].x = _stageWidth / 2 + allObjects.Xpos_mc.x + 150*i ;
+			RandomIndexArray[i].x = _stageWidth / 2 + allObjects.Xpos_mc.x +30 ;
+			if (i > 0)
+			{
+			RandomIndexArray[i].x = RandomIndexArray[i-1].x  + RandomIndexArray[i-1].width + 30
+			}
+			
 			RandomIndexArray[i].y = _stageHeight / 2 - 14.5;
 			RandomIndexArray[i].height = 207.75 //_stageHeight / 4.5;
 			RandomIndexArray[i].scaleX = RandomIndexArray[i].scaleY;
-				if (RandomIndexArray[0].x + RandomIndexArray[1].x + RandomIndexArray[2].x +RandomIndexArray[3].x  > allObjects.Fullwidth.width)
-				{
-					addObject(FinalArray[0], FinalArray[1], FinalArray[2], FinalArray[3]);
-					break
-					trace ("good")
-				}
 			addChild(RandomIndexArray[i])
+				if (RandomIndexArray[0].width + RandomIndexArray[1].width + RandomIndexArray[2].width + RandomIndexArray[3].width + 4*30  > allObjects.Fullwidth.width)
+				{
+					
+/*					
+			FinalArray.length = 0
+					
+			First_SecondMIx();
+			
+			choosingFunc(FirstRandom, SecondRandom);
+
+			addObject(FinalArray[0], FinalArray[1], FinalArray[2], FinalArray[3]);*/
+			
+					
+					
+					
+					trace ("AR ETEVAAAAAAA")
+				}
+				else
+				{
+				addChild(RandomIndexArray[i])
+				}
+			
 			
 			}
-			
-			trace (RandomIndexArray[0].x)
-			trace (RandomIndexArray[1].x)
-			trace (RandomIndexArray[2].x)
-			trace (RandomIndexArray[3].x)
-			trace ("amati jamia:")
-			trace (RandomIndexArray[0].x + RandomIndexArray[1].x + RandomIndexArray[2].x + RandomIndexArray[3].x)
-			trace ("sul:")
-			trace (RandomIndexArray[0].x + RandomIndexArray[1].x + RandomIndexArray[2].x + RandomIndexArray[3].x + 50 * 4)
-			trace (allObjects.Fullwidth.width)
 		}
 
 		
