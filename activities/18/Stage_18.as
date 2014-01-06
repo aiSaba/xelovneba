@@ -21,6 +21,7 @@
 		private var arcArray:Array;
 		private var graphArray:Array;
 		private var portArray:Array;
+		private var FinalArray:Array = new Array();;
 		
 		private var RandomArray:Array;
 		private var RandomIndexArray:Array;
@@ -31,6 +32,10 @@
 		private var PortRandom:int;
 		private var FirstRandom:int;
 		private var SecondRandom:int;
+		private var FirstRandomObject:int;
+		private var SecondRandomObject:int;
+		
+		
 		
 		private var nat_1:MovieClip;
 		private var nat_2:MovieClip;
@@ -156,11 +161,13 @@
 			PortRandom = randomPlus.getNum();
 			
 			First_SecondMIx();
+			
 			choosingFunc(FirstRandom, SecondRandom);
 
 			
+			addObject(FinalArray[0], FinalArray[1], FinalArray[2], FinalArray[3]);
 			//addObject(NatRandom, ArcRandom, GraphRandom, PortRandom);
-			//trace (allObjects.Fullwidth.width)
+			
 		}
 		
 		private function First_SecondMIx ():void
@@ -190,53 +197,43 @@
 		{
 			RandomArray = [naturmortArray, arcArray, graphArray, portArray]
 			
-			
-			for (var i:int = 0; i < RandomArray [FirstArray].length; i++ )
+			for (var i:int = 0; i < 3; i++ )
 			{
-				RandomArray [FirstArray][i]
+			randomPlus = new RandomPlus(8);
+			FirstRandomObject = randomPlus.getNum();
+			FinalArray.push (RandomArray [FirstArray][FirstRandomObject])
+			trace (FinalArray)
 			}
 			
+			FinalArray.push (RandomArray [SecondArray][SecondRandom])
 			
-			
-			
-			RandomArray [SecondArray][0]
-			
-			
-			
+			trace (FinalArray)
+			// FinalArray aris is rac bolos unda daidos...
 			
 		}
 		
 		
-		
-		
-		
-		
-		
-		
-		
-		
-		
+
 		/// function romelsac gadaecema  4  mc , itvlis da  kribavs suratebis zomebs (mxolod x gerdzis(width), radgan y mudmivia)  , jams  adarebs   charchos zomas da debs im shemtxvevashi tu eteva.
 		private function addObject(RandomIndex_1, RandomIndex_2, RandomIndex_3, RandomIndex_4):void
 		{
-			RandomIndexArray = [naturmortArray[RandomIndex_1], arcArray[RandomIndex_2], graphArray[RandomIndex_3], portArray[RandomIndex_4]]
+			RandomIndexArray = [RandomIndex_1, RandomIndex_2, RandomIndex_3, RandomIndex_4]
 			
 			for (var i:int = 0; i < RandomIndexArray.length; i++ )
 			{
 				
 				
 				
-			RandomIndexArray[i].x = _stageWidth / 2 + allObjects.Xpos_mc.x +75*i ;
+			RandomIndexArray[i].x = _stageWidth / 2 + allObjects.Xpos_mc.x + 150*i ;
 			RandomIndexArray[i].y = _stageHeight / 2 - 14.5;
 			RandomIndexArray[i].height = 207.75 //_stageHeight / 4.5;
 			RandomIndexArray[i].scaleX = RandomIndexArray[i].scaleY;
-						if (RandomIndexArray[0].x + RandomIndexArray[1].x + RandomIndexArray[2].x +RandomIndexArray[3].x  > allObjects.Fullwidth.width)
-			{
-				addObject(NatRandom, ArcRandom, GraphRandom, PortRandom);
-				break
-			trace ("good")
-			
-			}
+				if (RandomIndexArray[0].x + RandomIndexArray[1].x + RandomIndexArray[2].x +RandomIndexArray[3].x  > allObjects.Fullwidth.width)
+				{
+					addObject(FinalArray[0], FinalArray[1], FinalArray[2], FinalArray[3]);
+					break
+					trace ("good")
+				}
 			addChild(RandomIndexArray[i])
 			
 			}
@@ -249,7 +246,7 @@
 			trace (RandomIndexArray[0].x + RandomIndexArray[1].x + RandomIndexArray[2].x + RandomIndexArray[3].x)
 			trace ("sul:")
 			trace (RandomIndexArray[0].x + RandomIndexArray[1].x + RandomIndexArray[2].x + RandomIndexArray[3].x + 50 * 4)
-			
+			trace (allObjects.Fullwidth.width)
 		}
 
 		
