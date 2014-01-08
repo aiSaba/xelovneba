@@ -22,7 +22,6 @@
 		private var portArray:Array;
 		private var FinalArray:Array = new Array();
 		
-		
 		private var RandomArray:Array;
 		private var RandomIndexArray:Array;
 		
@@ -147,11 +146,9 @@
 			////  masivebis asarevad....
 			randomPlus = new RandomPlus(3);
 			FirstRandom = randomPlus.getNum();
-			trace(FirstRandom)
 			
 			randomPlus = new RandomPlus(3);
 			SecondRandom = randomPlus.getNum();
-			trace(SecondRandom)
 			/////
 			
 			if (FirstRandom == SecondRandom)
@@ -161,7 +158,7 @@
 		
 		}
 		
-		// irchevs    4 masividan romeli   2 is elementebi daideba ekranze
+		// irchevs    4 masividan romeli   2 is elementebi daideba ekranze // choosingfuncs gadaecema am 4 i masividan ert ertis rigiti nomeri.
 		
 		private function choosingFunc(FirstArray, SecondArray):void
 		
@@ -174,13 +171,44 @@
 				FirstRandomObject = randomPlus.getNum();
 				
 				FinalArray.push(RandomArray[FirstArray][FirstRandomObject])
-				if (i>0){
-					if (FinalArray[i-1].name == FinalArray[i].name ) 
-					{
-						trace ("ganmeorda...")
-						//break
-					}
+				
+				if ((i > 0) && (FinalArray[i - 1].name != FinalArray[i].name))
+				{
+					trace("ar gameorda...")
+					trace(FinalArray[i - 1].name)
+					trace(FinalArray[i].name)
+					trace(FinalArray)
+					
+					FinalArray.pop();
+					FinalArray.push(RandomArray[FirstArray][FirstRandomObject])
+					
 				}
+				
+				else if ((i == 2) && ((FinalArray[0].name == FinalArray[1].name)||(FinalArray[1].name == FinalArray[2].name)||(FinalArray[0].name == FinalArray[2].name)))
+				{
+					trace("gameorda...")
+					//FinalArray.length = 0
+					//First_SecondMIx();
+					//choosingFunc(FirstRandom, SecondRandom);
+					break
+				}
+				
+/*				if ((i > 0) && (FinalArray[i - 1].name == FinalArray[i].name))
+				{
+					trace("gameorda...")
+					trace(FinalArray[i - 1].name)
+					trace(FinalArray[i].name)
+					trace(FinalArray)
+					
+					FinalArray.pop();
+					FinalArray.pop();
+					FinalArray.pop();
+					FinalArray.pop();
+					First_SecondMIx();
+					choosingFunc(FirstRandom, SecondRandom);
+					return
+				}*/
+
 				
 			}
 			
@@ -209,31 +237,38 @@
 				RandomIndexArray[i].height = 207.75 //_stageHeight / 4.5;
 				RandomIndexArray[i].scaleX = RandomIndexArray[i].scaleY;
 				
-				
-							if (RandomIndexArray[0].width + RandomIndexArray[1].width + RandomIndexArray[2].width + RandomIndexArray[3].width + 4 * 30 > allObjects.Fullwidth.width)
-			{
-				
-				FinalArray.pop();
-				FinalArray.pop();
-				FinalArray.pop();
-				FinalArray.pop();
-				First_SecondMIx();
-				choosingFunc(FirstRandom, SecondRandom);
-				addObject(FinalArray[0], FinalArray[1], FinalArray[2], FinalArray[3]);
-				
-				trace("AR ETEVAAAAAAA")
-				break
-			}
+				if (RandomIndexArray[0].width + RandomIndexArray[1].width + RandomIndexArray[2].width + RandomIndexArray[3].width + 4 * 30 > allObjects.Fullwidth.width)
+				{
+					
+					FinalArray.pop();
+					FinalArray.pop();
+					FinalArray.pop();
+					FinalArray.pop();
+					First_SecondMIx();
+					choosingFunc(FirstRandom, SecondRandom);
+					addObject(FinalArray[0], FinalArray[1], FinalArray[2], FinalArray[3]);
+					
+					//trace("AR ETEVAAAAAAA")
+					break
+				}
 				else
 				{
-					addChild(RandomIndexArray[i])
+					var myRandomList: Array = new Array( RandomIndexArray.length );
 					
-				
+					// Random number
+				var a = Math.floor(Math.random() * RandomIndexArray.length);
+				// A swap
+				myRandomList[i] = myRandomList[a];
+				// put whatever is in index a in the ith position
+				//myRandomList[a] = myList[i];
+				// restore whatever was in the ith position to index a
+					
+					addChild(myRandomList[i])
 				}
 			}
-			trace(allObjects.Fullwidth.width)
-			trace(RandomIndexArray[0].width + RandomIndexArray[1].width + RandomIndexArray[2].width + RandomIndexArray[3].width + 4 * 30)
-
+			//trace(allObjects.Fullwidth.width)
+			//trace(RandomIndexArray[0].width + RandomIndexArray[1].width + RandomIndexArray[2].width + RandomIndexArray[3].width + 4 * 30)
+		
 		}
 		
 		private function addStage():void
