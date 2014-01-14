@@ -320,12 +320,29 @@
 				FinalArray[1].removeEventListener(MouseEvent.MOUSE_DOWN, IncorrectAnsFunc)
 				FinalArray[2].removeEventListener(MouseEvent.MOUSE_DOWN, IncorrectAnsFunc)
 
-				for (var t:int = 0; t < 4; t++ )
-					{
-						trace ("shlis darchenil suratebs")
-						removeChild(FinalArray[t]);
-						FinalArray[t] = null;
-					}
+				if (FinalArray[0])
+				{
+				removeChild(FinalArray[0]);
+				FinalArray[0] = null;
+				}
+				
+				else if (FinalArray[1])
+				{
+				removeChild(FinalArray[1]);
+				FinalArray[1] = null;
+				}
+				
+				else if (FinalArray[2])
+				{
+				removeChild(FinalArray[2]);
+				FinalArray[2] = null;
+				}
+				
+				else if (FinalArray[3])
+				{
+				removeChild(FinalArray[3]);
+				FinalArray[3] = null;
+				}
 				
 				removeChild(allObjects);
 				allObjects = null;
