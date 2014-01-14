@@ -17,6 +17,7 @@
 		private var Graphic_paintObjectsArray:Array;
 		private var Perwera_paintObjectsArray:Array;
 		private var startingPosX:int;
+		private var CorrectCounter:int;
 		
 		private var startingPosY:int;
 		private var dropCounter:int = 0;
@@ -49,7 +50,7 @@
 			
 			amogdebulebisArray = []
 			addListeners();
-			allObjects.drop_site_mc.YposBox.visible = true // false
+			allObjects.drop_site_mc.YposBox.visible = false ; 
 			allObjects.nothing_mc.visible = false
 		
 		}
@@ -204,12 +205,53 @@
 			allObjects.scaleX = allObjects.scaleY;
 		}
 		
+		private function destroy ():void
+		{
+			TweenMax.killAll();
+			
+			if (allObjects)
+			{
+				for (var i:int = 0; i < Graphic_paintObjectsArray.length; i++)
+			{
+				Graphic_paintObjectsArray[i].removeEventListener(MouseEvent.MOUSE_DOWN, dragFunc);
+				Graphic_paintObjectsArray[i].removeEventListener(MouseEvent.MOUSE_UP, dragStopFunc);
+				
+			}
+			
+			for (var k:int = 0; k < Perwera_paintObjectsArray.length; k++)
+			{
+				Perwera_paintObjectsArray[k].removeEventListener(MouseEvent.MOUSE_DOWN, dragFunc);
+				Perwera_paintObjectsArray[k].removeEventListener(MouseEvent.MOUSE_UP, dragStopFuncNoDrop);
+				
+			}
+			removeChild(allObjects);
+			allObjects = null;
+			}
+			exit(null)
+		}
+		
+		private function exit(e:*):void
+		{
+			dispatchEvent(new DataEvent(DataEvent.DATA, false, false, "endOfScene"));
+			trace(dispatchEvent)
+		}
+		
 		private function CorrecteFunc()
 		{
 			soundControl = new SoundControl();
 			soundControl.loadSound("correct.mp3", 0.5);
 			addChild(soundControl);
 			soundControl.soundPlay();
+			
+						
+			CorrectCounter++
+			trace (CorrectCounter)
+			
+			if (CorrectCounter == 5 )
+			{
+				ClapFunc();
+				setTimeout(destroy, 1500)
+			}
 		}
 		
 		private function FalseFunc()
@@ -226,6 +268,7 @@
 			soundControl.loadSound("clap.mp3", 1);
 			addChild(soundControl);
 			soundControl.soundPlay();
+			
 		}
 	
 	}
