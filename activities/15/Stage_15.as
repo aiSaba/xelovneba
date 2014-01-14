@@ -148,7 +148,7 @@
 				TweenLite.to(e.currentTarget, 0.5, {x: allObjects.drop_site_mc.x, y: allObjects.drop_site_mc.YposBox.y + e.currentTarget.height / 4, scaleX: 0.7, scaleY: 0.7});
 				allObjects.drop_site_mc.YposBox.y = allObjects.drop_site_mc.YposBox.y + e.currentTarget.height /1.5
 				CorrecteFunc();
-				TweenMax.to(e.currentTarget, 1, {glowFilter: {color: 0x33cccc, alpha: 1, blurX: 15, blurY: 15, strength: 3, remove: 1}});
+				TweenMax.to(e.currentTarget, 1, {glowFilter: {color: 0x91e600, alpha: 1, blurX: 15, blurY: 15, strength: 3, remove: 1}});
 				
 			}
 				else if (e.currentTarget.name == allObjects.tilo_mc.name)
@@ -158,7 +158,7 @@
 				TweenLite.to(e.currentTarget, 0.5, {x: allObjects.drop_site_mc.x, y: allObjects.drop_site_mc.YposBox.y + e.currentTarget.height / 4, scaleX: 0.7, scaleY: 0.7});
 				allObjects.drop_site_mc.YposBox.y = allObjects.drop_site_mc.YposBox.y + e.currentTarget.height /1.2
 				CorrecteFunc();
-				TweenMax.to(e.currentTarget, 1, {glowFilter: {color: 0x33cccc, alpha: 1, blurX: 15, blurY: 15, strength: 3, remove: 1}});
+				TweenMax.to(e.currentTarget, 1, {glowFilter: {color: 0x91e600, alpha: 1, blurX: 15, blurY: 15, strength: 3, remove: 1}});
 				
 			}
 			
