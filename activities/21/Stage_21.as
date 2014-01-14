@@ -210,7 +210,7 @@
 			
 			//dadebuli_MC = addChild(archeuliMasivi[ChosenElementIndex])
 			
-			trace (dadebuli_MC)
+			trace(dadebuli_MC)
 		}
 		
 		private function addStage():void
@@ -235,14 +235,13 @@
 				allObjects.graphic_button_mc.removeEventListener(MouseEvent.CLICK, InCorrectFunc);
 				allObjects.qandakeba_button_mc.removeEventListener(MouseEvent.CLICK, InCorrectFunc);
 				allObjects.perwera_button_mc.removeEventListener(MouseEvent.CLICK, InCorrectFunc);
+				
+				removeChild(allObjects);
+				allObjects = null;
+				
+				removeChild(dadebuli_MC)
+				dadebuli_MC = null;
 			}
-			
-			removeChild (dadebuli_MC)
-			dadebuli_MC = null;
-			
-			removeChild(allObjects);
-			allObjects = null;
-			
 			
 			exit(null)
 		}

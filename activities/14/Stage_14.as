@@ -26,6 +26,8 @@
 		private var Graphic_NameIndex:int
 		private var Perwera_NameIndex:int;
 		
+		private var CorrectCounter:int;
+		
 		public function Stage_14(_stageWidth:Number = 1024, _stageHeight:Number = 768)
 		{
 			this._stageHeight = _stageHeight;
@@ -147,7 +149,7 @@
 				TweenLite.to(e.currentTarget, 0.5, {x: allObjects.drop_site_mc.x, y: allObjects.drop_site_mc.YposBox.y + e.currentTarget.height / 4, scaleX: 0.8, scaleY: 0.8});
 				allObjects.drop_site_mc.YposBox.y = allObjects.drop_site_mc.YposBox.y + e.currentTarget.height / 1.5
 				CorrecteFunc();
-				TweenMax.to(e.currentTarget, 1, {glowFilter: {color: 0x33cccc, alpha: 1, blurX: 15, blurY: 15, strength: 3, remove: 1}});
+				TweenMax.to(e.currentTarget, 1, {glowFilter: {color: 0x91e600, alpha: 1, blurX: 15, blurY: 15, strength: 3, remove: 1}});
 				
 			}
 			else
@@ -157,7 +159,7 @@
 				TweenLite.to(e.currentTarget, 0.5, {x: allObjects.drop_site_mc.x, y: allObjects.drop_site_mc.YposBox.y + e.currentTarget.height / 5.5});
 				allObjects.drop_site_mc.YposBox.y = allObjects.drop_site_mc.YposBox.y + e.currentTarget.height
 				CorrecteFunc();
-				TweenMax.to(e.currentTarget, 1, {glowFilter: {color: 0x33cccc, alpha: 1, blurX: 15, blurY: 15, strength: 3, remove: 1}});
+				TweenMax.to(e.currentTarget, 1, {glowFilter: {color: 0x91e600, alpha: 1, blurX: 15, blurY: 15, strength: 3, remove: 1}});
 			}
 		
 		}
@@ -172,12 +174,55 @@
 			allObjects.scaleX = allObjects.scaleY;
 		}
 		
+		
+		private function destroy ():void
+		{
+			TweenMax.killAll();
+			
+			if (allObjects)
+			{
+				for (var i:int = 0; i < Graphic_paintObjectsArray.length; i++)
+			{
+				Graphic_paintObjectsArray[i].removeEventListener(MouseEvent.MOUSE_DOWN, dragFunc);
+				Graphic_paintObjectsArray[i].removeEventListener(MouseEvent.MOUSE_UP, dragStopFunc);
+				
+			}
+			
+			for (var k:int = 0; k < Perwera_paintObjectsArray.length; k++)
+			{
+				Perwera_paintObjectsArray[k].removeEventListener(MouseEvent.MOUSE_DOWN, dragFunc);
+				Perwera_paintObjectsArray[k].removeEventListener(MouseEvent.MOUSE_UP, dragStopFuncNoDrop);
+				
+			}
+			removeChild(allObjects);
+			allObjects = null;
+			}
+			exit(null)
+		}
+		
+		private function exit(e:*):void
+		{
+			dispatchEvent(new DataEvent(DataEvent.DATA, false, false, "endOfScene"));
+			trace(dispatchEvent)
+		}
+		
 		private function CorrecteFunc()
 		{
 			soundControl = new SoundControl();
 			soundControl.loadSound("correct.mp3", 0.5);
 			addChild(soundControl);
 			soundControl.soundPlay();
+			
+			
+			
+			CorrectCounter++
+			trace (CorrectCounter)
+			
+			if (CorrectCounter == 7 )
+			{
+				ClapFunc();
+				setTimeout(destroy, 1500)
+			}
 		}
 		
 		private function FalseFunc()
