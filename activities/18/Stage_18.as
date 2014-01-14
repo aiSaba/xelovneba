@@ -253,17 +253,11 @@
 				}
 				else
 				{
-					var myRandomList: Array = new Array( RandomIndexArray.length );
+					for (var p:int = 0; p < FinalArray.length; p++ )
+					{
+						addChild(FinalArray[p])
+					}
 					
-					// Random number
-				var a = Math.floor(Math.random() * RandomIndexArray.length);
-				// A swap
-				myRandomList[i] = myRandomList[a];
-				// put whatever is in index a in the ith position
-				//myRandomList[a] = myList[i];
-				// restore whatever was in the ith position to index a
-					
-					addChild(myRandomList[i])
 				}
 			}
 			//trace(allObjects.Fullwidth.width)
