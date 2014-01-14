@@ -70,6 +70,8 @@
 		private var port_8:MovieClip;
 		private var port_9:MovieClip;
 		
+		private var CorrectAnswer:MovieClip;
+		
 		public function Stage_18(_stageWidth:Number = 1024, _stageHeight:Number = 768)
 		{
 			this._stageHeight = _stageHeight;
@@ -214,9 +216,20 @@
 			
 			FinalArray.push(RandomArray[SecondArray][SecondRandom])
 			
+			CorrectAnswer = RandomArray[SecondArray][SecondRandom]
+			
+			CorrectAnswer.addEventListener (MouseEvent.MOUSE_DOWN, correctAnsFunc)
+			trace (CorrectAnswer)
+			
 			trace(FinalArray)
 			// FinalArray aris is rac bolos unda daidos...
 		
+		}
+		
+		private function correctAnsFunc (e:MouseEvent):void
+		{
+			TweenMax.to(e.currentTarget, 1, { glowFilter: { color: 0x91e600, alpha: 1, blurX: 30, blurY: 30, remove: true }} );
+			CorrecteFunc();
 		}
 		
 		/// function romelsac gadaecema  4  mc , itvlis da  kribavs suratebis zomebs (mxolod x gerdzis(width), radgan y mudmivia)  , jams  adarebs   charchos zomas da debs im shemtxvevashi tu eteva.
@@ -258,11 +271,75 @@
 						addChild(FinalArray[p])
 					}
 					
+					for (var x:int = 0; x < 3; x++ )
+					{
+						FinalArray[x].addEventListener(MouseEvent.MOUSE_DOWN, IncorrectAnsFunc)
+					}
+					
 				}
 			}
 			//trace(allObjects.Fullwidth.width)
 			//trace(RandomIndexArray[0].width + RandomIndexArray[1].width + RandomIndexArray[2].width + RandomIndexArray[3].width + 4 * 30)
 		
+		}
+		
+		private function IncorrectAnsFunc (e:MouseEvent):void
+		{
+			FalseFunc();
+		TweenMax.to(e.currentTarget, 1, { glowFilter: { color: 0xff0000, alpha: 1, blurX: 30, blurY: 30, remove: true }} );
+
+		}
+		
+		
+				private function CorrecteFunc()
+		{
+			soundControl = new SoundControl();
+			soundControl.loadSound("correct.mp3", 0.5);
+			addChild(soundControl);
+			soundControl.soundPlay();
+			setTimeout(destroy, 1500)
+		}
+		
+		private function FalseFunc()
+		{
+			soundControl = new SoundControl();
+			soundControl.loadSound("error.mp3", 1);
+			addChild(soundControl);
+			soundControl.soundPlay();
+		}
+		
+		private function destroy ():void
+		{
+			
+			TweenMax.killAll();
+			if (allObjects)
+			{
+				
+				CorrectAnswer.removeEventListener (MouseEvent.MOUSE_DOWN, correctAnsFunc)
+				FinalArray[0].removeEventListener(MouseEvent.MOUSE_DOWN, IncorrectAnsFunc)
+				FinalArray[1].removeEventListener(MouseEvent.MOUSE_DOWN, IncorrectAnsFunc)
+				FinalArray[2].removeEventListener(MouseEvent.MOUSE_DOWN, IncorrectAnsFunc)
+
+				for (var t:int = 0; t < 4; t++ )
+					{
+						trace ("shlis darchenil suratebs")
+						removeChild(FinalArray[t]);
+						FinalArray[t] = null;
+					}
+				
+				removeChild(allObjects);
+				allObjects = null;
+
+			}
+			
+			
+			exit(null)
+		}
+		
+		private function exit(e:*):void
+		{
+			dispatchEvent(new DataEvent(DataEvent.DATA, false, false, "endOfScene"));
+			trace(dispatchEvent)
 		}
 		
 		private function addStage():void
