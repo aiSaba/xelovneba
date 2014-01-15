@@ -28,6 +28,7 @@
 		private var FirstRandom:int;
 		private var SecondRandom:int;
 		private var FirstRandomObject:int;
+		private var oldFirstRandomObject:int;
 		private var SecondRandomObject:int;
 		
 		private var nat_1:MovieClip;
@@ -160,6 +161,24 @@
 		
 		}
 		
+		private function randomFix ():void
+		{
+					oldFirstRandomObject = FirstRandomObject;
+					randomPlus = new RandomPlus(8);
+					FirstRandomObject = randomPlus.getNum();
+
+				trace ("oldFirstRandomObject: " + oldFirstRandomObject)
+				trace ("FirstRandomObject: " + FirstRandomObject)
+					if (oldFirstRandomObject == FirstRandomObject)
+					{
+						randomFix();
+					}
+					else 
+					{
+						"ar dasWirda"
+					}
+		}
+		
 		// irchevs    4 masividan romeli   2 is elementebi daideba ekranze // choosingfuncs gadaecema am 4 i masividan ert ertis rigiti nomeri.
 		
 		private function choosingFunc(FirstArray, SecondArray):void
@@ -169,17 +188,27 @@
 			
 			for (var i:int = 0; i < 3; i++)
 			{
+				randomFix();
+				/*oldFirstRandomObject = FirstRandomObject;
 				randomPlus = new RandomPlus(8);
-				FirstRandomObject = randomPlus.getNum();
+				FirstRandomObject = randomPlus.getNum();*/
+				//trace ("oldFirstRandomObject: " + oldFirstRandomObject)
+				//trace ("FirstRandomObject: " + FirstRandomObject)
+				trace (FinalArray)
+				
+/*				if (FirstRandomObject == oldFirstRandomObject)
+				{
+					randomFix();
+				}*/
 				
 				FinalArray.push(RandomArray[FirstArray][FirstRandomObject])
 				
 				if ((i > 0) && (FinalArray[i - 1].name != FinalArray[i].name))
 				{
-					trace("ar gameorda...")
-					trace(FinalArray[i - 1].name)
-					trace(FinalArray[i].name)
-					trace(FinalArray)
+					//trace("ar gameorda...")
+					//trace(FinalArray[i - 1].name)
+					//trace(FinalArray[i].name)
+					//trace(FinalArray)
 					
 					FinalArray.pop();
 					FinalArray.push(RandomArray[FirstArray][FirstRandomObject])
@@ -188,7 +217,7 @@
 				
 				else if ((i == 2) && ((FinalArray[0].name == FinalArray[1].name)||(FinalArray[1].name == FinalArray[2].name)||(FinalArray[0].name == FinalArray[2].name)))
 				{
-					trace("gameorda...")
+					//trace("gameorda...")
 					//FinalArray.length = 0
 					//First_SecondMIx();
 					//choosingFunc(FirstRandom, SecondRandom);
@@ -219,9 +248,9 @@
 			CorrectAnswer = RandomArray[SecondArray][SecondRandom]
 			
 			CorrectAnswer.addEventListener (MouseEvent.MOUSE_DOWN, correctAnsFunc)
-			trace (CorrectAnswer)
+			//trace (CorrectAnswer)
 			
-			trace(FinalArray)
+			//trace(FinalArray)
 			// FinalArray aris is rac bolos unda daidos...
 		
 		}
@@ -326,19 +355,19 @@
 				FinalArray[0] = null;
 				}
 				
-				else if (FinalArray[1])
+				 if (FinalArray[1])
 				{
 				removeChild(FinalArray[1]);
 				FinalArray[1] = null;
 				}
 				
-				else if (FinalArray[2])
+				 if (FinalArray[2])
 				{
 				removeChild(FinalArray[2]);
 				FinalArray[2] = null;
 				}
 				
-				else if (FinalArray[3])
+				 if (FinalArray[3])
 				{
 				removeChild(FinalArray[3]);
 				FinalArray[3] = null;
