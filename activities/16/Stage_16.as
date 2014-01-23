@@ -15,6 +15,7 @@
 		private var allObjects:MovieClip;
 		private var ObjectsArray:Array;
 		
+		
 		public function Stage_16(_stageWidth:Number = 1024, _stageHeight:Number = 768)
 		{
 			this._stageHeight = _stageHeight;
@@ -26,6 +27,7 @@
 		{
 			removeEventListener(Event.ADDED_TO_STAGE, init);
 			allFunc();
+			
 		}
 		
 		private function allFunc():void
