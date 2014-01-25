@@ -11,11 +11,10 @@ package DB
 	public class Create  extends EventDispatcher
 	{
 		
-		private var folder:File;
-		private var dbFile:File;
+	
 		private var conn:SQLConnection;
 	//	private var createTables:CreateTables;
-		private var createStatement:SQLStatement;
+		private var createStmt:SQLStatement;
 		
 		
 		public function Create()
@@ -26,14 +25,12 @@ package DB
 		private function init():void
 		{
 			
-			conn = new SQLConnection();
+			var folder:File= File.applicationDirectory;
+			var dbFile:File= folder.resolvePath(Settings.DB_NAME);
 			
+			conn = new SQLConnection();	
 			conn.addEventListener(SQLEvent.OPEN, openHandler);
 			conn.addEventListener(SQLErrorEvent.ERROR, errorHandler);
-
-			folder = File.applicationDirectory;
-			dbFile = folder.resolvePath(Settings.DB_NAME);
-	
 			conn.openAsync(dbFile);		
 		}
 		
@@ -41,6 +38,26 @@ package DB
 		{
 			createNewTable();
 		}	
+		
+		private function destroy():void
+		{
+			if (createStmt)
+			{
+				createStmt.removeEventListener(SQLEvent.RESULT, createResult); 
+				createStmt.removeEventListener(SQLErrorEvent.ERROR, createError);
+				createStmt = null;
+			}
+			
+			if (conn)
+			{
+				conn.removeEventListener(SQLEvent.OPEN, openHandler);
+				conn.removeEventListener(SQLErrorEvent.ERROR, errorHandler);
+				conn.close();
+				conn = null;
+			}
+			
+			
+		}
 		
 		private function errorHandler(event:SQLErrorEvent):void
 		{
@@ -50,11 +67,9 @@ package DB
 		
 		private function createNewTable():void  //event:SQLEvent
 		{
-			createStatement = new SQLStatement();
-			createStatement.sqlConnection = conn;
-		
-			
-			
+			createStmt = new SQLStatement();
+			createStmt.sqlConnection = conn;
+
 						//var sql:String =
 	        //"DELETE FROM profileTable; " 
 	//
@@ -71,17 +86,18 @@ package DB
 			")";
 		
 
-			createStatement.text = sql;
+			createStmt.text = sql;
 			
-			createStatement.addEventListener(SQLEvent.RESULT, createResult); 
-			createStatement.addEventListener(SQLErrorEvent.ERROR, createError);
+			createStmt.addEventListener(SQLEvent.RESULT, createResult); 
+			createStmt.addEventListener(SQLErrorEvent.ERROR, createError);
 			
-			createStatement.execute(); 
+			createStmt.execute(); 
 			
 		}
 		
 		private  function createResult(event:SQLEvent):void 
 		{ 
+			destroy();
 			dispatchEvent(new CustomEvent(CustomEvent.DATA, "Table created"));
 			trace("Table created"); 
 		} 

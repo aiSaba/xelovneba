@@ -8,6 +8,7 @@
 	import flash.events.MouseEvent;
 	import flash.events.DataEvent;
 	
+	
 	public class StartAppClass extends MovieClip
 	{
 		public var applicationStartObjects:MovieClip;
@@ -29,6 +30,7 @@
 		private function destroy(event:Event):void
 		{
 			removeEventListener(Event.REMOVED_FROM_STAGE, destroy);
+			
 			
 			if (boy)
 			{
@@ -57,6 +59,7 @@
 		{
 			removeEventListener(Event.ADDED_TO_STAGE, init);
 			startApp();
+			
 		
 		}
 		
@@ -110,24 +113,18 @@
 			addChild(saveNewProfile);
 		
 		}
-		
+				
 		private function saveNewProfileListener(e:DataEvent):void
 		{
-			//saveNewProfile.removeEventListener(DataEvent.DATA, saveNewProfileListener);
-			//saveNewProfile = null;
+			saveNewProfile.removeEventListener(DataEvent.DATA, saveNewProfileListener);
+			saveNewProfile = null;
 			
-			if (e.data == "washale")
-			{
-				removeChild(applicationStartObjects);
-				applicationStartObjects = null;
-			}
-			 if (e.data == "start game")
-			{
-				dispatchEvent(new CustomEvent(CustomEvent.DATA, "start game"));
-			}
+			removeChild(applicationStartObjects);
+			applicationStartObjects = null;
+			
+			dispatchEvent(new CustomEvent(CustomEvent.DATA, "start game"));
 			
 			
-		
 		}
 	
 	}

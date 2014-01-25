@@ -19,36 +19,39 @@ package DB
 	public class Insert extends EventDispatcher
 	{
 		private var insertStmt:SQLStatement;
-		private var stmt:SQLStatement;
+	
 		private var valueToInsert:String;
 		private var conn:SQLConnection;
-		private var folder:File;
-		private var dbFile:File;
+		
 	
 		
 		public function Insert()
 		{
-			//init();
+			
 		}
+		
+		private function destroy():void
+		{
+			if (conn)
+			{
+				conn.removeEventListener(SQLEvent.OPEN, openHandler);
+				conn.removeEventListener(SQLUpdateEvent.INSERT, insertStmtListener);
+				conn.close();
+				conn = null;
+			}
+		}
+		
 		public function init(valueToInsert:String):void
 		{
 			this.valueToInsert = valueToInsert;
 			
+			var folder:File= File.applicationDirectory;
+			var dbFile:File= folder.resolvePath(Settings.DB_NAME);
+			
 			conn = new SQLConnection();
-			
-			conn = new SQLConnection();	
 			conn.addEventListener(SQLEvent.OPEN, openHandler);
-			//conn.addEventListener(SQLErrorEvent.ERROR, errorHandler);
-
-			folder = File.applicationDirectory;
-			dbFile = folder.resolvePath(Settings.DB_NAME);
-	
 			conn.openAsync(dbFile);		
-			
-			
-						
-			
-			
+	
 		}
 		
 		private function openHandler(e:Event):void 
@@ -56,11 +59,9 @@ package DB
 			insertStmt = new SQLStatement();
 			insertStmt.sqlConnection = conn;
 			
-			var sql:String = "";
 			
 			var dataForInput:String = HelperStrings.trim(valueToInsert);
-			
-			
+			var sql:String = "";			
 			sql += "INSERT INTO profileTable (saxeli) ";
 			sql += "VALUES ('" + dataForInput  + "')";
 			insertStmt.text = sql;
@@ -72,6 +73,7 @@ package DB
 		
 		private function insertStmtListener(e:SQLUpdateEvent):void 
 		{
+			destroy();
 			dispatchEvent(new CustomEvent(CustomEvent.DATA, "data inserted)"));
 		}
 		

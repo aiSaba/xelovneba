@@ -42,9 +42,12 @@ package
 		private var allScore:int;
 		
 		private var pauseMc:MovieClip;
+		private var allSheet:MovieClip;
+		private var lastPage:MovieClip;
 		
 		public function Controller(stageW:Number = 1024, stageH:Number = 768)
 		{
+			
 			this.stageH = stageH;
 			this.stageW = stageW;
 			
@@ -72,10 +75,9 @@ package
 			button.visible = false;
 			soundOn = true;
 			
-			swfArray = [ "firstZgarbi.swf","stage_1.swf", "secondZgarbi.swf", "stage_2.swf","thirdZgarbi.swf", "stage_3.swf", "fourthZgarbi.swf","stage_4.swf" ,
-				 "fifthZgarbi.swf", "stage_5.swf","sixthZgarbi.swf", "stage_6.swf","seventhZgarbi.swf","stage_7.swf", "Stage_End.swf"];
+			swfArray = [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
 			
-			swfIndex = Settings.POSITION;
+			swfIndex = Settings.POSITION + 1;
 			allScore = Settings.SCORE;
 			loadSwf();
 		}
@@ -90,7 +92,7 @@ package
 			context.applicationDomain = new ApplicationDomain();
 			context.allowLoadBytesCodeExecution = true;
 			
-			var request:URLRequest = new URLRequest("swfs/" + swfArray[swfIndex]);
+			var request:URLRequest = new URLRequest("swfs/" + swfArray[swfIndex].toString() + ".swf");
 			
 			loader.contentLoaderInfo.addEventListener(Event.COMPLETE, onCompleteHandler);
 			loader.load(request, context);
@@ -112,29 +114,43 @@ package
 		
 		private function sceneEndController(e:DataEvent):void
 		{
-			
 			if (e.data.indexOf("endOfGame") > -1)
 			{
 				if (swfIndex == swfArray.length - 1)
 				{
 					return;
 				}
-				swfIndex += 1;
+				
+				if (loadedContent)
+				{
+					removeChild(loadedContent);
+				}
+				
 				loader.unloadAndStop();
 				
-				loadSwf();
-				trace("endOfGameTrace")
-				
 				var qula:String = e.data.split("|")[1];
-				allScore += parseInt(qula);
+				if (qula)
+				{
+					allScore += parseInt(qula);
+				}
+				else
+				{
+					//
+				}
 				
 				update = new Update();
 				update.addEventListener(CustomEvent.DATA, updateListener);
-				update.letsDo(allScore, (swfIndex - 1));
+				
+				update.letsDo(allScore, (swfIndex));
+				swfIndex++;
+				loadSwf();
 				
 			}
 			if (e.data == "The End")
 			{
+				
+				loader.unloadAndStop();
+				
 				var myTextFormat:TextFormat = new TextFormat();
 				myTextFormat.size = 50;
 				myTextFormat.color = 0xFFFFFF;
@@ -170,11 +186,7 @@ package
 				loader.unloadAndStop();
 				
 				button.visible = false;
-				swfIndex -= 1;
 				loadSwf();
-				
-					//button.removeEventListener(DataEvent.DATA, buttonsListener);
-				
 			}
 			
 			if (e.data == "sound")
@@ -209,9 +221,54 @@ package
 			if (e.data == "home")
 			{
 				button.removeEventListener(DataEvent.DATA, buttonsListener);
-				removeChildren(0);
+				removeChild(button);
+				removeChild(loadedContent);
+				loader.unloadAndStop();
 				dispatchEvent(new DataEvent(DataEvent.DATA, false, false, "HomeClick"));
 			}
+			
+			if (e.data == "nextStage")
+			{
+				if (swfIndex == swfArray.length - 1)
+				{
+					return;
+				}
+				
+				if (loadedContent)
+				{
+					removeChild(loadedContent);
+				}
+				
+				loader.unloadAndStop();
+				update = new Update();
+				update.addEventListener(CustomEvent.DATA, updateListener);
+				
+				update.letsDo(allScore, (swfIndex));
+				swfIndex++;
+				loadSwf();
+			}
+			
+			if (e.data == "previousStage")
+			{
+				if (swfIndex == 0)
+				{
+					return;
+				}
+				
+				if (loadedContent)
+				{
+					removeChild(loadedContent);
+				}
+				
+				loader.unloadAndStop();
+				update = new Update();
+				update.addEventListener(CustomEvent.DATA, updateListener);
+				
+				update.letsDo(allScore, (swfIndex));
+				swfIndex--;
+				loadSwf();
+			}
+			
 			
 			if (e.data == "exit")
 			{
@@ -219,8 +276,118 @@ package
 				button.removeEventListener(DataEvent.DATA, buttonsListener);
 				
 			}
+			if (e.data == "all")
+			{
+				showAllLevels();
+			}
 		
 		} ///end buttonListernr
+		
+		private function showAllLevels():void
+		{
+			removeChild(loadedContent);
+			allSheet = new AllSheet() as MovieClip
+			allSheet.height = stageH / 1.2;
+			allSheet.scaleX = allSheet.scaleY;
+			
+			button.visible = false;
+			
+			allSheet.x = stageW / 2;
+			allSheet.y = stageH / 2;
+			/*allSheet.x = (stageW - allSheet.width) / 2;
+			 allSheet.y = (stageH - allSheet.height) / 2;*/
+			
+			addChild(allSheet);
+			
+			//allSheet.close_mc.addEventListener(MouseEvent.MOUSE_DOWN, closeSheet);
+			
+			var item:MovieClip;
+			for (var i:int = 1; i <= 35; i++)
+			{
+				item = allSheet.getChildByName("mc_" + i.toString()) as MovieClip;
+				//item.num_txt.text = i.toString();
+				item.addEventListener(MouseEvent.MOUSE_DOWN, gameLevelAction, false, 0, true);
+			}
+			trace(allSheet.home_button)
+			trace(allSheet.exit_button)
+			allSheet.home_button.addEventListener(MouseEvent.MOUSE_DOWN, homeFunc);
+			allSheet.exit_button.addEventListener(MouseEvent.MOUSE_DOWN, exitFunc)
+			allSheet.authors.addEventListener(MouseEvent.MOUSE_DOWN, authorsFunc)
+		}
+		
+		private function authorsFunc(e:MouseEvent):void 
+		{
+			removeChild(allSheet);
+			lastPage = new LastPage();
+			lastPage.x = stageW / 2;
+			lastPage.y = stageH / 2;
+			addChild(lastPage);
+			lastPage.closeLast.addEventListener(MouseEvent.MOUSE_DOWN, closeLastPage);
+		}
+		
+		private function closeLastPage(e:MouseEvent):void 
+		{
+			removeChild(lastPage);
+			addChild(allSheet);
+		}
+		
+		private function exitFunc(e:MouseEvent):void
+		{
+			NativeApplication.nativeApplication.exit();
+			button.removeEventListener(DataEvent.DATA, buttonsListener);
+		}
+		
+		private function homeFunc(e:MouseEvent):void
+		{
+			button.removeEventListener(DataEvent.DATA, buttonsListener);
+			removeChild(button);
+			removeChild(allSheet);
+			loader.unloadAndStop();
+			dispatchEvent(new DataEvent(DataEvent.DATA, false, false, "HomeClick"));
+		}
+		
+		private function closeSheet(e:MouseEvent):void
+		{
+			button.visible = true;
+			var item:MovieClip;
+			for (var i:int = 1; i <= 16; i++)
+			{
+				item = allSheet.getChildByName("mc_" + i.toString()) as MovieClip;
+				item.num_txt.text = i.toString();
+				item.removeEventListener(MouseEvent.MOUSE_DOWN, gameLevelAction);
+			}
+			allSheet.close_mc.removeEventListener(MouseEvent.MOUSE_DOWN, closeSheet);
+			removeChild(allSheet);
+			allSheet = null;
+		}
+		
+		private function gameLevelAction(e:MouseEvent):void
+		{
+			button.visible = true;
+			var item:MovieClip;
+			for (var i:int = 1; i <= 16; i++)
+			{
+				item = allSheet.getChildByName("mc_" + i.toString()) as MovieClip;
+				//item.num_txt.text = i.toString();
+				item.removeEventListener(MouseEvent.MOUSE_DOWN, gameLevelAction);
+			}
+			
+			removeChild(allSheet);
+			allSheet = null;
+			swfIndex = Number(e.currentTarget.name.substr(3));
+			button.visible = false;
+			
+			try
+			{
+				removeChild(loadedContent);
+				loader.unloadAndStop();
+				loadSwf();
+			}
+			catch (e:Error)
+			{
+				trace("Error", e)
+			}
+		}
 		
 		private function resumeFunc(ev:MouseEvent):void
 		{
@@ -241,9 +408,6 @@ package
 		private function loadedContentListener(e:Event):void
 		{
 			removeEventListener(Event.ADDED_TO_STAGE, loadedContentListener);
-			
-			trace("ახლა კი ნაღდად ჩაიტვირთა SWF")
-		
 		}
 	}
 

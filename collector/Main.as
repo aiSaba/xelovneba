@@ -33,7 +33,6 @@
 		private var startAppCass:StartAppClass;
 		private var controllerClass:Controller;
 		public static var currentSce:Object;
-		
 
 		
 		//private var soundOnOff:MovieClip;
@@ -97,20 +96,15 @@
 			startApp(false);
 		}
 		
-		public function startApp(restart:Boolean = true):void
+		private function startApp(restart:Boolean = true):void
 		{
-			
-			
-			
+
 			if (!restart)
 			{
 				chooseProfile = new ChooseProfile();
 				chooseProfile.addEventListener(CustomEvent.DATA, chooseProfileListener);
 				addChild(chooseProfile);
 			}
-			
-			
-			
 		}
 		
 		private function chooseProfileListener(e:CustomEvent):void 
@@ -144,14 +138,13 @@
 			removeChild(startAppCass);
 			startAppCass = null;
 
-			Settings.POSITION = 0;
+			Settings.POSITION = -1;
 			callControllerClass();
 		}
 		
 		private function callControllerClass():void
 		{
-			
-			controllerClass = new Controller(_stage.stageWidth, _stage.stageHeight);
+			controllerClass = new Controller(stage.stageWidth,stage.stageHeight);
 			addChild(controllerClass);
 			controllerClass.addEventListener(DataEvent.DATA, controllerClass_data);
 		}
@@ -163,12 +156,6 @@
 				startApp(false);
 			}
 		}
-		
-		
-		
-		
-		
-	
 	}
 
 }

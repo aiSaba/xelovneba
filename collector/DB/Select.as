@@ -13,22 +13,44 @@
 	public class Select  extends EventDispatcher
 	{
 		
-		private var folder:File;
-		private var dbFile:File;
+	
 		private var conn:SQLConnection;
-		private var selectData:SQLStatement 
+		private var selectStmt:SQLStatement;
 		
 		
 		public function Select()
 		{
 			
 		}
+		
+		private function destroy():void
+		{
+			
+			if (selectStmt)
+			{
+				selectStmt.removeEventListener(SQLEvent.RESULT, resultHandler);
+				selectStmt.removeEventListener(SQLErrorEvent.ERROR, errorHandler);
+				selectStmt = null;
+			}
+			
+			if (conn)
+			{
+				conn.removeEventListener(SQLEvent.OPEN, openHandler);
+				conn.removeEventListener(SQLErrorEvent.ERROR, errorHandler);
+				conn.close();
+				conn = null;
+				
+			}
+			
+			
+			
+		}
 	
 		public function letsWork():void
 		{
 			
-			folder = File.applicationDirectory;
-			dbFile = folder.resolvePath(Settings.DB_NAME);
+			var folder:File = File.applicationDirectory;
+			var dbFile:File = folder.resolvePath(Settings.DB_NAME);
 			if (dbFile.exists)
 			{
 				
@@ -43,6 +65,7 @@
 			}
 			else
 			{
+				destroy();
 				dispatchEvent(new CustomEvent(CustomEvent.DATA, {type:"database don't exists"}));
 			}
 			
@@ -51,30 +74,30 @@
 		
 		
 		
-		function openHandler(event:SQLEvent):void
+		private function openHandler(event:SQLEvent):void
 		{
-			selectData = new SQLStatement();
-			selectData.sqlConnection = conn;
+			selectStmt = new SQLStatement();
+			selectStmt.sqlConnection = conn;
 			
-			selectData.text = "SELECT * FROM profileTable";
-			selectData.addEventListener(SQLEvent.RESULT, resultHandler);
-			selectData.addEventListener(SQLErrorEvent.ERROR, errorHandler);
-			selectData.execute();
+			selectStmt.text = "SELECT * FROM profileTable";
+			selectStmt.addEventListener(SQLEvent.RESULT, resultHandler);
+			selectStmt.addEventListener(SQLErrorEvent.ERROR, errorHandler);
+			selectStmt.execute();
 		}	
 		
 		private function resultHandler(e:Event):void 
 		{
 			
 		
-			var result:SQLResult = selectData.getResult();
+			var result:SQLResult = selectStmt.getResult();
 			var usersArray:Array = result.data as Array;
 			
-			
+			destroy();
 			dispatchEvent(new CustomEvent(CustomEvent.DATA, usersArray));
 			
 		}
 		
-		function errorHandler(event:SQLErrorEvent):void
+		private function errorHandler(event:SQLErrorEvent):void
 		{
 			trace("Error message:", event.error.message);
 			trace("Details:", event.error.details);

@@ -11,15 +11,11 @@
 	
 	public class Update extends EventDispatcher
 	{
-		private var folder:File;
-		private var dbFile:File;
-		private var conn:SQLConnection;
-	
 		
-		private var createStatement:SQLStatement;
+		private var conn:SQLConnection;
 		private var score:int;
 		private var pos:int;
-		private var insertStmt:SQLStatement;
+		private var updateStmt:SQLStatement;
 		
 		
 		
@@ -28,47 +24,53 @@
 			
 		}
 		
+		private function destroy():void
+		{
+			
+			if (updateStmt)
+			{
+				updateStmt.removeEventListener(SQLEvent.RESULT, updateStmtHandler);
+				updateStmt = null;
+			}
+			
+			if (conn)
+			{
+				conn.removeEventListener(SQLEvent.OPEN, openHandler);
+				conn.close();
+				conn = null;
+			}
+		}
+		
 		public function letsDo(score:int,pos:int):void
 		{
 			this.pos = pos;
 			this.score = score;
+					
+			var folder:File= File.applicationDirectory;
+			var dbFile:File = folder.resolvePath(Settings.DB_NAME);
+			
 			conn = new SQLConnection();
-			
 			conn.addEventListener(SQLEvent.OPEN, openHandler);
-			////conn.addEventListener(SQLErrorEvent.ERROR, errorHandler);
-
-			folder = File.applicationDirectory;
-			dbFile = folder.resolvePath(Settings.DB_NAME);
-	
 			conn.openAsync(dbFile);	
-			
-			
 		}
 		
 		private function openHandler(e:SQLEvent):void 
 		{
-			insertStmt = new SQLStatement();
-			insertStmt.sqlConnection = conn;
+			updateStmt = new SQLStatement();
+			updateStmt.sqlConnection = conn;
 			
 			var sql:String = "UPDATE profileTable SET qula = '" + score.toString() + "', boloPozicia='"+pos.toString()+"' WHERE saxeli = '" + Settings.PLAYER + "'";
 			
-			
-			trace (sql)
-			insertStmt.text = sql;
-			insertStmt.addEventListener(SQLEvent.RESULT, insertStmtHandler);
+			updateStmt.text = sql;
+			updateStmt.addEventListener(SQLEvent.RESULT, updateStmtHandler);
 
-			insertStmt.execute();
+			updateStmt.execute();
 			
 		}
 		
-		private function insertStmtHandler(e:SQLEvent):void 
+		private function updateStmtHandler(e:SQLEvent):void 
 		{
-			insertStmt.removeEventListener(SQLEvent.RESULT, insertStmtHandler);
-			conn.removeEventListener(SQLEvent.OPEN, openHandler);
-			//conn.removeEventListener(SQLErrorEvent.ERROR, errorHandler);
-			
-			conn.close();
-			
+			destroy();
 			dispatchEvent(new CustomEvent(CustomEvent.DATA, "updated"));
 		}
 		

@@ -71,9 +71,27 @@
 			button.sound.addEventListener(MouseEvent.MOUSE_DOWN, soundListener);
 			button.pause.addEventListener(MouseEvent.MOUSE_DOWN, pauseListener);
 			button.home.addEventListener(MouseEvent.MOUSE_DOWN, homeListener);
+			button.all.addEventListener(MouseEvent.MOUSE_DOWN, allListener);
 			button.exit.addEventListener(MouseEvent.MOUSE_DOWN, exitListener);
 			button.soundOff.addEventListener(MouseEvent.MOUSE_DOWN, soundOffListener);
+			button.next.addEventListener(MouseEvent.MOUSE_DOWN, nextStage);
+			button.back.addEventListener(MouseEvent.MOUSE_DOWN, previousStage);
 			trace(button.soundOff);
+		}
+		
+		private function previousStage(e:MouseEvent):void 
+		{
+			dispatchEvent(new DataEvent(DataEvent.DATA, false, false, "previousStage"));
+		}
+		
+		private function nextStage(e:MouseEvent):void 
+		{
+			dispatchEvent(new DataEvent(DataEvent.DATA, false, false, "nextStage"));
+		}
+		
+		private function allListener(e:MouseEvent):void 
+		{
+			dispatchEvent(new DataEvent(DataEvent.DATA, false, false, "all"));
 		}
 		
 		private function exitListener(ev:MouseEvent):void
