@@ -14,7 +14,7 @@
 		private var _stageHeight:Number;
 		private var allObjects:MovieClip;
 		private var ObjectsArray:Array;
-		
+		private var soundControl:SoundControl;
 		
 		public function Stage_16(_stageWidth:Number = 1024, _stageHeight:Number = 768)
 		{
@@ -80,8 +80,10 @@
 		
 		private function showTextFunc(e:MouseEvent):void
 		{
-			TweenLite.to(e.currentTarget.textbox_mc, 0.5, {alpha: 1});
-		}
+			TweenMax.to(e.currentTarget, 1, { glowFilter: { color: 0x91e600, alpha: 1, blurX: 30, blurY: 30, remove: true }} );
+			TweenLite.to(e.currentTarget.textbox_mc, 0.5, { alpha: 1 } );
+			CorrecteFunc();
+			}
 		
 		private function hideTextFunc(e:MouseEvent):void
 		{
@@ -92,6 +94,14 @@
 		{
 			
 			TweenLite.to(Target.textbox_mc, 0.5, {alpha: 0});
+		}
+		
+			private function CorrecteFunc()
+		{
+			soundControl = new SoundControl();
+			soundControl.loadSound("correct.mp3", 0.5);
+			addChild(soundControl);
+			soundControl.soundPlay();
 		}
 		
 		private function addStage():void
