@@ -57,7 +57,10 @@
 		
 		private function objColors(e:MouseEvent):void 
 		{
-			e.currentTarget.transform.colorTransform = color;
+			if (Main_Mc.picture.colortrans.visible == false)
+			{
+				e.currentTarget.transform.colorTransform = color;
+			}
 		}
 		
 		private function changeColor(e:MouseEvent):void

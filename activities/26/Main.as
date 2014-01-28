@@ -4,6 +4,7 @@
 	import flash.events.DataEvent;
 	import flash.events.Event;
 	import flash.events.MouseEvent;
+	import flash.ui.Mouse;
 	
 	
 	public class Main extends MovieClip {
@@ -20,6 +21,7 @@
 		private var old_Y:Number;
 		private var colorBox:MovieClip;
 		private var randNumb:Number;
+		private var qula:int;
 		public function Main() 
 		{
 			addEventListener(Event.ADDED_TO_STAGE, init)			
@@ -32,7 +34,10 @@
 		
 		private function initHandler():void 
 		{
+			dispatchEvent(new DataEvent(DataEvent.DATA, false, false, "ButtonVisibleTrue"));
 			colorBox = new ColortransMove();
+			colorBox.width = colorBox.width / 2;
+			colorBox.height = colorBox.height / 2;
 			p1 = new Picture1(Main_Mc,colorBox);
 			p2 = new Picture2(Main_Mc,colorBox);
 			p3 = new Picture3(Main_Mc,colorBox);
@@ -55,7 +60,9 @@
 		private function EndOfGame(e:MouseEvent):void 
 		{
 			
-			dispatchEvent(new DataEvent(DataEvent.DATA, false, false, "EndOfGame"))
+			dispatchEvent(new DataEvent(DataEvent.DATA, false, false, "ButtonVisibleFalse"));
+			qula = 5
+			dispatchEvent(new DataEvent(DataEvent.DATA, false, false, "endOfGame|" + qula.toString() ));
 			Destroy();
 		}
 		
@@ -63,11 +70,13 @@
 		{
 			Main_Mc.picture.colortrans.visible = true;
 			removeChild(colorBox);
+			Mouse.show();
 		}
 		
 		private function changePointClick(e:MouseEvent):void 
 		{
 			addChild(colorBox);
+			Mouse.hide();
 			Main_Mc.picture.colortrans.visible = false;
 			stage.addEventListener(MouseEvent.MOUSE_MOVE, mouseMoveHandler);			
 		}
@@ -75,8 +84,8 @@
 		private function mouseMoveHandler(e:MouseEvent):void 
 		{
 			
-			colorBox.x = e.stageX - colorBox.width / 2 + 18;
-			colorBox.y = e.stageY - colorBox.height / 2 + 15;
+			colorBox.x = e.stageX - colorBox.width / 2 //+ 20;
+			colorBox.y = e.stageY - colorBox.height / 2 + 6;
 		}
 		private function goHome(e:MouseEvent):void
 		{
@@ -87,7 +96,9 @@
 		
 		private function jpgListener(e:DataEvent):void 
 		{
-			dispatchEvent(new DataEvent(DataEvent.DATA, false, false, "EndOfGame"))
+			dispatchEvent(new DataEvent(DataEvent.DATA, false, false, "ButtonVisibleFalse"));
+			qula = 5
+			dispatchEvent(new DataEvent(DataEvent.DATA, false, false, "endOfGame|" + qula.toString() ));
 			Destroy();
 		}
 		private function Destroy():void 

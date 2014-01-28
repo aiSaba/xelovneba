@@ -7,6 +7,7 @@
 	import flash.events.Event;
 	import flash.events.MouseEvent;
 	import flash.geom.ColorTransform;
+	import flash.ui.Mouse;
 	
 	public class Picture1 extends MovieClip
 	{		
@@ -64,7 +65,10 @@
 		
 		private function objColors(e:MouseEvent):void 
 		{
-			e.currentTarget.transform.colorTransform = color;
+			if (Main_Mc.picture.colortrans.visible == false)
+			{
+				e.currentTarget.transform.colorTransform = color;
+			}		
 		}
 		
 		private function changeColor(e:MouseEvent):void
