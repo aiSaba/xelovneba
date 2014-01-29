@@ -38,6 +38,7 @@
 			grafika.y = _stageHeight / 2;
 			grafika.height = _stageHeight/1.5;
 			grafika.scaleX = grafika.scaleY;
+			dispatchEvent(new DataEvent(DataEvent.DATA, false, false, "ButtonVisibleTrue"));
 			
 			
 			grafika.akvareli.addEventListener(MouseEvent.MOUSE_DOWN, Func1);
@@ -51,35 +52,12 @@
 		
 			
 			textArray = [grafika.text_Pasteli,grafika.text_Paper, grafika.text_Funjebi_Zeti, grafika.text_Guashi, grafika.text_Akvareli, grafika.text_Sangina, grafika.text_Pencil]
-			grafika.next_button_mc.addEventListener (MouseEvent.CLICK , destroy);
+
 		}
 		
 		
 		
-		private function destroy (e:MouseEvent):void
-		{
-			
-			
-			
-				grafika.akvareli.removeEventListener(MouseEvent.MOUSE_DOWN, Func1);
-				grafika.sangina.removeEventListener(MouseEvent.MOUSE_DOWN, Func2);
-				grafika.pencil.removeEventListener(MouseEvent.MOUSE_DOWN, Func3);
-				grafika.pasteli.removeEventListener(MouseEvent.MOUSE_DOWN, Func4);
-				grafika.guashi.removeEventListener(MouseEvent.MOUSE_DOWN, Func5);
-				grafika.funjebi_Zeti.removeEventListener(MouseEvent.MOUSE_DOWN, Func6);
-				grafika.paper.removeEventListener(MouseEvent.MOUSE_DOWN, Func7);
-				
-				removeChild (grafika)
-				grafika = null;
-			
-			exit(null)
-		}
-		
-		private function exit(e:*):void
-		{
-			dispatchEvent(new DataEvent(DataEvent.DATA, false, false, "endOfScene"));
-			trace(dispatchEvent)
-		}
+	
 		
 		
 		
@@ -136,7 +114,7 @@
 			grafika.guashi.removeEventListener(MouseEvent.MOUSE_DOWN, Func5);
 			grafika.funjebi_Zeti.removeEventListener(MouseEvent.MOUSE_DOWN, Func6);
 			grafika.paper.removeEventListener(MouseEvent.MOUSE_DOWN, Func7);
-			grafika.next_button_mc.removeEventListener (MouseEvent.CLICK , destroy);
+			
 			setTimeout(next, 1500);
 		}
 		private function next ():void
