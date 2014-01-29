@@ -221,6 +221,7 @@
 			allObjects.y = _stageHeight / 2;
 			allObjects.height = _stageHeight / 1.5;
 			allObjects.scaleX = allObjects.scaleY;
+			dispatchEvent(new DataEvent(DataEvent.DATA, false, false, "ButtonVisibleTrue"));
 		
 		}
 		
@@ -248,8 +249,9 @@
 		
 		private function exit(e:*):void
 		{
-			dispatchEvent(new DataEvent(DataEvent.DATA, false, false, "endOfScene"));
-			trace(dispatchEvent)
+			dispatchEvent(new DataEvent(DataEvent.DATA, false, false, "ButtonVisibleFalse"));
+			dispatchEvent(new DataEvent(DataEvent.DATA, false, false, "endOfGame"));
+			trace(dispatchEvent);
 		}
 		
 		private function CorrecteFunc()
