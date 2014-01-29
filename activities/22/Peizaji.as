@@ -42,6 +42,7 @@
 			Igrafics.y = _stageHeight / 2 ;
 			Igrafics.height = _stageHeight/1.5;
 			Igrafics.scaleX = Igrafics.scaleY;
+			dispatchEvent(new DataEvent(DataEvent.DATA, false, false, "ButtonVisibleTrue"));
 			pirveliStage();
 		}
 		
@@ -59,10 +60,7 @@
 			
 			Igrafics.button_Back.addEventListener(MouseEvent.MOUSE_DOWN, BackFunc);
 			Igrafics.button_Next.addEventListener(MouseEvent.MOUSE_DOWN, NextFunc);
-			
-			Igrafics.next_button_mc.removeEventListener (MouseEvent.MOUSE_DOWN , destroy3);
-			Igrafics.next_button_mc.removeEventListener (MouseEvent.MOUSE_DOWN , destroy2);
-			Igrafics.next_button_mc.addEventListener (MouseEvent.MOUSE_DOWN , destroy1);
+
 	
 			
 			IpicsGrap.Grafic_1.addEventListener(MouseEvent.MOUSE_DOWN, showFunc_1);
@@ -165,81 +163,14 @@
 			IIpicsGrap.Grafic_2_show.button_Exit.addEventListener(MouseEvent.MOUSE_DOWN, _nonshowFunc_2);
 			IIpicsGrap.Grafic_3_show.button_Exit.addEventListener(MouseEvent.MOUSE_DOWN, _nonshowFunc_3);
 			
-			Igrafics.next_button_mc.removeEventListener (MouseEvent.MOUSE_DOWN , destroy1);
-			Igrafics.next_button_mc.removeEventListener (MouseEvent.MOUSE_DOWN , destroy3);
-			Igrafics.next_button_mc.addEventListener (MouseEvent.MOUSE_DOWN , destroy2);
+
 	
 			
 			Igrafics.button_Back.addEventListener(MouseEvent.MOUSE_DOWN, BackFunc2);
 			Igrafics.button_Next.addEventListener(MouseEvent.MOUSE_DOWN, NextFunc2);
 		}
 		
-		private function destroy1 (e:MouseEvent):void
-		{
-			IpicsGrap.Grafic_1.removeEventListener(MouseEvent.MOUSE_DOWN, showFunc_1);
-			IpicsGrap.Grafic_2.removeEventListener(MouseEvent.MOUSE_DOWN, showFunc_2);
-			IpicsGrap.Grafic_3.removeEventListener(MouseEvent.MOUSE_DOWN, showFunc_3);
-			IpicsGrap.Grafic_1_show.button_Exit.removeEventListener(MouseEvent.MOUSE_DOWN, nonshowFunc_1);
-			IpicsGrap.Grafic_2_show.button_Exit.removeEventListener(MouseEvent.MOUSE_DOWN, nonshowFunc_2);
-			IpicsGrap.Grafic_3_show.button_Exit.removeEventListener(MouseEvent.MOUSE_DOWN, nonshowFunc_3);
-			
-			Igrafics.button_Back.removeEventListener(MouseEvent.MOUSE_DOWN, BackFunc);
-			Igrafics.button_Next.removeEventListener(MouseEvent.MOUSE_DOWN, NextFunc);
-			
-			removeChild (IpicsGrap);
-			IpicsGrap = null;
-			
-			removeChild (Igrafics);
-			Igrafics = null;
-			exit(null)
-		}
 		
-		private function destroy2 (e:MouseEvent):void
-		{
-			IIpicsGrap.Grafic_1.removeEventListener(MouseEvent.MOUSE_DOWN, _showFunc_1);
-			IIpicsGrap.Grafic_2.removeEventListener(MouseEvent.MOUSE_DOWN, _showFunc_2);
-			IIpicsGrap.Grafic_3.removeEventListener(MouseEvent.MOUSE_DOWN, _showFunc_3);
-			IIpicsGrap.Grafic_1_show.button_Exit.removeEventListener(MouseEvent.MOUSE_DOWN, _nonshowFunc_1);
-			IIpicsGrap.Grafic_2_show.button_Exit.removeEventListener(MouseEvent.MOUSE_DOWN, _nonshowFunc_2);
-			IIpicsGrap.Grafic_3_show.button_Exit.removeEventListener(MouseEvent.MOUSE_DOWN, _nonshowFunc_3);
-			
-		Igrafics.button_Back.removeEventListener(MouseEvent.MOUSE_DOWN, BackFunc2);
-			Igrafics.button_Next.removeEventListener(MouseEvent.MOUSE_DOWN, NextFunc2);
-			
-				removeChild (IIpicsGrap);
-				IIpicsGrap = null;
-				
-			removeChild (Igrafics);
-			Igrafics = null;
-				
-				exit(null)
-				
-		}
-		
-		private function destroy3 (e:MouseEvent):void
-		{
-			IIIpicsGrap.Grafic_1.removeEventListener(MouseEvent.MOUSE_DOWN, _3showFunc_1);
-			IIIpicsGrap.Grafic_2.removeEventListener(MouseEvent.MOUSE_DOWN, _3showFunc_2);
-			IIIpicsGrap.Grafic_3.removeEventListener(MouseEvent.MOUSE_DOWN, _3showFunc_3);
-			
-			IIIpicsGrap.Grafic_1_show.button_Exit.removeEventListener(MouseEvent.MOUSE_DOWN, _3nonshowFunc_1);
-			IIIpicsGrap.Grafic_2_show.button_Exit.removeEventListener(MouseEvent.MOUSE_DOWN, _3nonshowFunc_2);
-			IIIpicsGrap.Grafic_3_show.button_Exit.removeEventListener(MouseEvent.MOUSE_DOWN, _3nonshowFunc_3);
-			
-			Igrafics.button_Back.removeEventListener(MouseEvent.MOUSE_DOWN, BackFunc3);
-			Igrafics.button_Next.removeEventListener(MouseEvent.MOUSE_DOWN, NextFunc3);
-			removeChild (IIIpicsGrap);
-			IIIpicsGrap = null;
-			removeChild (Igrafics);
-			Igrafics = null;
-			exit(null)
-		}
-		
-		private function exit(e:*):void
-		{
-			dispatchEvent(new DataEvent(DataEvent.DATA, false, false, "endOfScene"));
-			trace(dispatchEvent)
-		}
 		
 		private function _showFunc_1(MouseEvent):void
 		{
@@ -346,11 +277,7 @@
 			
 			Igrafics.button_Back.addEventListener(MouseEvent.MOUSE_DOWN, BackFunc3);
 			Igrafics.button_Next.addEventListener(MouseEvent.MOUSE_DOWN, NextFunc3);
-			
-			Igrafics.next_button_mc.removeEventListener (MouseEvent.MOUSE_DOWN , destroy1);
-			Igrafics.next_button_mc.removeEventListener (MouseEvent.MOUSE_DOWN , destroy2);
-			
-			Igrafics.next_button_mc.addEventListener (MouseEvent.MOUSE_DOWN , destroy3);
+
 	
 			
 			}

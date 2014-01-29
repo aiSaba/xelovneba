@@ -42,6 +42,7 @@
 			Igrafics.y = _stageHeight / 2 ;
 			Igrafics.height = _stageHeight/1.5;
 			Igrafics.scaleX = Igrafics.scaleY;
+			dispatchEvent(new DataEvent(DataEvent.DATA, false, false, "ButtonVisibleTrue"));
 			pirveliStage();
 		}
 		
