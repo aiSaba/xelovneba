@@ -37,7 +37,7 @@
 			ferwera.y = _stageHeight / 2;
 			ferwera.height = _stageHeight/1.5;
 			ferwera.scaleX = ferwera.scaleY;
-			
+			dispatchEvent(new DataEvent(DataEvent.DATA, false, false, "ButtonVisibleTrue"));
 			
 			ferwera.Funji_Zeti.addEventListener(MouseEvent.MOUSE_DOWN, Func1);
 			ferwera.Zeti.addEventListener(MouseEvent.MOUSE_DOWN, Func2);
@@ -49,16 +49,11 @@
 			
 			textArray = [ferwera.text_Funji_Zeti, ferwera.text_Zeti, ferwera.text_Molberti, ferwera.text_Palitra, ferwera.text_Tilo]
 			
-			ferwera.next_button_mc.addEventListener (MouseEvent.MOUSE_DOWN , destroyCaller)
 			
 			
 		}
 		
-		
-		private function destroyCaller (e:MouseEvent):void
-		{
-			destroy();
-		}
+
 		
 		private function Func1 (MouseEvent):void
 		{
@@ -87,29 +82,7 @@
 			waitFunc();
 		}
 		
-		private function destroy ():void
-		{
-			
-				
-				ferwera.Funji_Zeti.removeEventListener(MouseEvent.MOUSE_DOWN, Func1);
-				ferwera.Zeti.removeEventListener(MouseEvent.MOUSE_DOWN, Func2);
-				ferwera.Molberti.removeEventListener(MouseEvent.MOUSE_DOWN, Func3);
-				ferwera.Palitra.removeEventListener(MouseEvent.MOUSE_DOWN, Func4);
-				ferwera.Tilo.removeEventListener(MouseEvent.MOUSE_DOWN, Func5);
-				
-				
-				
-				removeChild (ferwera)
-				ferwera = null;
-			
-			exit(null)
-		}
-		
-			private function exit(e:*):void
-		{
-			dispatchEvent(new DataEvent(DataEvent.DATA, false, false, "endOfScene"));
-			trace(dispatchEvent)
-		}
+
 		
 		private function waitFunc():void
 		{
@@ -125,7 +98,7 @@
 			ferwera.Molberti.removeEventListener(MouseEvent.MOUSE_DOWN, Func3);
 			ferwera.Palitra.removeEventListener(MouseEvent.MOUSE_DOWN, Func4);
 			ferwera.Tilo.removeEventListener(MouseEvent.MOUSE_DOWN, Func5);
-			ferwera.next_button_mc.removeEventListener (MouseEvent.MOUSE_DOWN , destroyCaller)
+
 			
 			
 			
