@@ -47,6 +47,7 @@
 		
 		private function addObjects():void
 		{
+			setTimeout(butVis, 5);
 			all = new All();
 			all.x = _stageWidth / 2;
 			all.y = _stageHeight / 2;
@@ -58,6 +59,11 @@
 				all['obj_' + i].addEventListener(MouseEvent.MOUSE_DOWN, cloneFunc);		
 			}
 			all.takePhoto.addEventListener(MouseEvent.MOUSE_DOWN, takePhotoFunc);
+		}
+		
+		private function butVis():void 
+		{
+			dispatchEvent(new DataEvent(DataEvent.DATA, false, false, "ButtonVisibleTrue"));
 		}
 		
 		private function stopDragFunc(e:MouseEvent):void

@@ -75,6 +75,7 @@
 		
 		private function addObjects():void
 		{
+			setTimeout(butVisible,5)
 			mainObjects = new MainObjects();
 			mainObjects.x = _stageWidth / 2;
 			mainObjects.y = _stageHeight / 2;
@@ -84,6 +85,7 @@
 			mainObjects.height = _stageHeight / 1.5;
 			mainObjects.scaleX = mainObjects.scaleY;
 			colorTranform = new ColorTransform();
+			
 			///////////////////////////////////////////
 			kvadrati = mainObjects.kvadrati;
 			martkutxedi = mainObjects.martkutxedi;
@@ -113,6 +115,11 @@
 				objectsArray[i].addEventListener(MouseEvent.MOUSE_DOWN, addToScene);
 			}
 			mainObjects.takePhoto.addEventListener(MouseEvent.MOUSE_DOWN, takePhotoFunc);
+		}
+		
+		private function butVisible():void 
+		{
+			dispatchEvent(new DataEvent(DataEvent.DATA, false, false, "ButtonVisibleTrue"));
 		}
 		
 		private function changeColor(e:MouseEvent):void

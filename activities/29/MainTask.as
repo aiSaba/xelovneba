@@ -57,6 +57,7 @@
 		
 		private function addObjects():void
 		{
+			setTimeout(butVis, 5);
 			all = new All();
 			all.x = _stageWidth / 2;
 			all.y = _stageHeight / 2;
@@ -85,6 +86,11 @@
 			eyeArr[0].visible = true;
 			hearArr[0].visible = true;
 			all.takePhoto.addEventListener(MouseEvent.MOUSE_DOWN, takePhotoFunc);
+		}
+		
+		private function butVis():void 
+		{
+			dispatchEvent(new DataEvent(DataEvent.DATA, false, false, "ButtonVisibleTrue"));
 		}
 		
 		private function changeFace(e:MouseEvent):void

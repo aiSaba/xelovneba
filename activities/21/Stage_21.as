@@ -198,9 +198,6 @@
 				archeuliMasivi[ChosenElementIndex].y = _stageHeight / 2 - archeuliMasivi[ChosenElementIndex].height / 1.5;
 				trace("daapatarava")
 			}
-			trace("ELEMENTIS SIMAGLE >>" + archeuliMasivi[ChosenElementIndex].height)
-			trace("BG SIMAGLE >>" + allObjects.bg_mc.height)
-			
 			addChild(archeuliMasivi[ChosenElementIndex])
 			
 			dadebuli_MC = archeuliMasivi[ChosenElementIndex]
@@ -215,14 +212,19 @@
 		
 		private function addStage():void
 		{
+			setTimeout(butVis,5)
 			allObjects = new AllObjects();
 			addChild(allObjects);
 			allObjects.x = _stageWidth / 2;
 			allObjects.y = _stageHeight / 2;
 			allObjects.height = _stageHeight / 1.5;
 			allObjects.scaleX = allObjects.scaleY;
-			dispatchEvent(new DataEvent(DataEvent.DATA, false, false, "ButtonVisibleTrue"));
+		}
 		
+		private function butVis():void 
+		{
+			trace("inc")
+			dispatchEvent(new DataEvent(DataEvent.DATA, false, false, "ButtonVisibleTrue"));
 		}
 		
 		private function destroy():void
@@ -251,7 +253,6 @@
 		{
 			dispatchEvent(new DataEvent(DataEvent.DATA, false, false, "ButtonVisibleFalse"));
 			dispatchEvent(new DataEvent(DataEvent.DATA, false, false, "endOfGame"));
-			trace(dispatchEvent);
 		}
 		
 		private function CorrecteFunc()

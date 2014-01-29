@@ -34,8 +34,8 @@
 		private function addObjects():void
 		{
 	
-			Main._stage.addEventListener(MouseEvent.MOUSE_DOWN, startDrawing);
-			Main._stage.addEventListener(MouseEvent.MOUSE_MOVE, draw);
+			mc.board.addEventListener(MouseEvent.MOUSE_DOWN, startDrawing);
+			mc.board.addEventListener(MouseEvent.MOUSE_MOVE, draw);
 			Main._stage.addEventListener(MouseEvent.MOUSE_UP, stopDrawing);
 			mc.takePhotoMc.addEventListener(MouseEvent.MOUSE_DOWN, scrFunc);
 			//mc.continueMc.addEventListener(MouseEvent.MOUSE_DOWN, nextFunc);

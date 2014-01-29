@@ -75,7 +75,8 @@ package
 			button.visible = false;
 			soundOn = true;
 			
-			swfArray = [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
+			swfArray = [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 
+						22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35];
 			
 			swfIndex = Settings.POSITION + 1;
 			allScore = Settings.SCORE;
@@ -84,7 +85,6 @@ package
 		
 		private function loadSwf():void
 		{
-			
 			loader = new Loader();
 			
 			var context:LoaderContext = new LoaderContext();
@@ -93,7 +93,6 @@ package
 			context.allowLoadBytesCodeExecution = true;
 			
 			var request:URLRequest = new URLRequest("swfs/" + swfArray[swfIndex].toString() + ".swf");
-			
 			loader.contentLoaderInfo.addEventListener(Event.COMPLETE, onCompleteHandler);
 			loader.load(request, context);
 		}
@@ -242,7 +241,7 @@ package
 				loader.unloadAndStop();
 				update = new Update();
 				update.addEventListener(CustomEvent.DATA, updateListener);
-				
+				button.visible = false;
 				update.letsDo(allScore, (swfIndex));
 				swfIndex++;
 				loadSwf();
@@ -259,7 +258,7 @@ package
 				{
 					removeChild(loadedContent);
 				}
-				
+				button.visible = false;
 				loader.unloadAndStop();
 				update = new Update();
 				update.addEventListener(CustomEvent.DATA, updateListener);
@@ -308,8 +307,6 @@ package
 				//item.num_txt.text = i.toString();
 				item.addEventListener(MouseEvent.MOUSE_DOWN, gameLevelAction, false, 0, true);
 			}
-			trace(allSheet.home_button)
-			trace(allSheet.exit_button)
 			allSheet.home_button.addEventListener(MouseEvent.MOUSE_DOWN, homeFunc);
 			allSheet.exit_button.addEventListener(MouseEvent.MOUSE_DOWN, exitFunc)
 			allSheet.authors.addEventListener(MouseEvent.MOUSE_DOWN, authorsFunc)
@@ -375,13 +372,16 @@ package
 			removeChild(allSheet);
 			allSheet = null;
 			swfIndex = Number(e.currentTarget.name.substr(3));
+			trace('swfIndex', swfIndex)
 			button.visible = false;
 			
 			try
 			{
+				swfIndex--;
+				loadSwf();
 				removeChild(loadedContent);
 				loader.unloadAndStop();
-				loadSwf();
+				
 			}
 			catch (e:Error)
 			{

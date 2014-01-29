@@ -57,6 +57,7 @@
 		
 		private function addObjects():void
 		{
+			setTimeout(butVis, 5);
 			all = new All2();
 			all.x = _stageWidth / 2;
 			all.y = _stageHeight / 2;
@@ -86,6 +87,11 @@
 			all.obj_4.x = 335;
 			all.obj_4.y = 165;
 			addChild(all);
+		}
+		
+		private function butVis():void 
+		{
+			dispatchEvent(new DataEvent(DataEvent.DATA, false, false, "ButtonVisibleTrue"));
 		}
 		
 		private function stopDragFunc(e:MouseEvent):void

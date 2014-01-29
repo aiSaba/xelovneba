@@ -22,7 +22,7 @@
 			this._stageWidth = _stageWidth;
 			this.mainMc = mainMc;			
 			addEventListener(Event.ADDED_TO_STAGE, init);
-			addEventListener(Event.REMOVED_FROM_STAGE, destroy);
+			//addEventListener(Event.REMOVED_FROM_STAGE, destroy);
 		}
 		
 		
@@ -38,7 +38,7 @@
 			
 			 draw = new Draw(mainMc);
 			addChild(draw);
-			mainMc.continueMc.addEventListener(MouseEvent.MOUSE_DOWN, destroy);
+			//mainMc.continueMc.addEventListener(MouseEvent.MOUSE_DOWN, destroy);
 			
 		}
 		
@@ -46,15 +46,10 @@
 		{
 				
 				dispatchEvent(new DataEvent(DataEvent.DATA, false, false, "endOfScene"));
-				destroy(null);
+				//destroy(null);
 		}
 		
-		private function destroy(arg:*):void
-		{
-			draw.clearStage();
-			mainMc.visible = false;
-			
-		}	
+		
 	}
 	
 }
