@@ -144,6 +144,7 @@
 			if (e.currentTarget.name == allObjects.molberti_mc.name)
 			{
 				e.currentTarget.removeEventListener(MouseEvent.MOUSE_DOWN, dragFunc);
+				e.currentTarget.removeEventListener(MouseEvent.MOUSE_UP, dragStopFunc);
 				e.currentTarget.stopDrag();
 				TweenLite.to(e.currentTarget, 0.5, {x: allObjects.drop_site_mc.x, y: allObjects.drop_site_mc.YposBox.y + e.currentTarget.height / 4, scaleX: 0.7, scaleY: 0.7});
 				allObjects.drop_site_mc.YposBox.y = allObjects.drop_site_mc.YposBox.y + e.currentTarget.height /1.5
@@ -154,6 +155,7 @@
 				else if (e.currentTarget.name == allObjects.tilo_mc.name)
 			{
 				e.currentTarget.removeEventListener(MouseEvent.MOUSE_DOWN, dragFunc);
+				e.currentTarget.removeEventListener(MouseEvent.MOUSE_UP, dragStopFunc);
 				e.currentTarget.stopDrag();
 				TweenLite.to(e.currentTarget, 0.5, {x: allObjects.drop_site_mc.x, y: allObjects.drop_site_mc.YposBox.y + e.currentTarget.height / 4, scaleX: 0.7, scaleY: 0.7});
 				allObjects.drop_site_mc.YposBox.y = allObjects.drop_site_mc.YposBox.y + e.currentTarget.height /1.2
@@ -165,32 +167,35 @@
 			else if (e.currentTarget.name == allObjects.oil_brush_mc.name)
 			{
 				e.currentTarget.removeEventListener(MouseEvent.MOUSE_DOWN, dragFunc);
+				e.currentTarget.removeEventListener(MouseEvent.MOUSE_UP, dragStopFunc);
 				e.currentTarget.stopDrag();
 				TweenLite.to(e.currentTarget, 0.5, {x: allObjects.drop_site_mc.x, y: allObjects.drop_site_mc.YposBox.y + e.currentTarget.height / 4, scaleX: 0.8, scaleY: 0.8});
 				allObjects.drop_site_mc.YposBox.y = allObjects.drop_site_mc.YposBox.y + e.currentTarget.height /1.2
 				CorrecteFunc();
-				TweenMax.to(e.currentTarget, 1, {glowFilter: {color: 0x33cccc, alpha: 1, blurX: 15, blurY: 15, strength: 3, remove: 1}});
+				TweenMax.to(e.currentTarget, 1, {glowFilter: {color: 0x91e600, alpha: 1, blurX: 15, blurY: 15, strength: 3, remove: 1}});
 				
 			}
 			
 			else if (e.currentTarget.name == allObjects.palitra_mc.name)
 			{
 				e.currentTarget.removeEventListener(MouseEvent.MOUSE_DOWN, dragFunc);
+				e.currentTarget.removeEventListener(MouseEvent.MOUSE_UP, dragStopFunc);
 				e.currentTarget.stopDrag();
 				TweenLite.to(e.currentTarget, 0.5, {x: allObjects.drop_site_mc.x, y: allObjects.drop_site_mc.YposBox.y + e.currentTarget.height / 4, scaleX: 0.8, scaleY: 0.8});
 				allObjects.drop_site_mc.YposBox.y = allObjects.drop_site_mc.YposBox.y + e.currentTarget.height /1.2
 				CorrecteFunc();
-				TweenMax.to(e.currentTarget, 1, {glowFilter: {color: 0x33cccc, alpha: 1, blurX: 15, blurY: 15, strength: 3, remove: 1}});
+				TweenMax.to(e.currentTarget, 1, {glowFilter: {color: 0x91e600, alpha: 1, blurX: 15, blurY: 15, strength: 3, remove: 1}});
 				
 			}
 			else
 			{
 				e.currentTarget.removeEventListener(MouseEvent.MOUSE_DOWN, dragFunc);
+				e.currentTarget.removeEventListener(MouseEvent.MOUSE_UP, dragStopFunc);
 				e.currentTarget.stopDrag();
 				TweenLite.to(e.currentTarget, 0.5, {x: allObjects.drop_site_mc.x, y: allObjects.drop_site_mc.YposBox.y + e.currentTarget.height / 6});
 				allObjects.drop_site_mc.YposBox.y = allObjects.drop_site_mc.YposBox.y + e.currentTarget.height /1.2
 				CorrecteFunc();
-				TweenMax.to(e.currentTarget, 1, {glowFilter: {color: 0x33cccc, alpha: 1, blurX: 15, blurY: 15, strength: 3, remove: 1}});
+				TweenMax.to(e.currentTarget, 1, {glowFilter: {color: 0x91e600, alpha: 1, blurX: 15, blurY: 15, strength: 3, remove: 1}});
 			}
 		
 		}
@@ -203,6 +208,7 @@
 			allObjects.y = _stageHeight / 2;
 			allObjects.height = _stageHeight / 1.5;
 			allObjects.scaleX = allObjects.scaleY;
+			dispatchEvent(new DataEvent(DataEvent.DATA, false, false, "ButtonVisibleTrue"));
 		}
 		
 		private function destroy ():void
@@ -232,8 +238,9 @@
 		
 		private function exit(e:*):void
 		{
-			dispatchEvent(new DataEvent(DataEvent.DATA, false, false, "endOfScene"));
-			trace(dispatchEvent)
+			dispatchEvent(new DataEvent(DataEvent.DATA, false, false, "ButtonVisibleFalse"));
+			dispatchEvent(new DataEvent(DataEvent.DATA, false, false, "endOfGame"));
+			trace(dispatchEvent);
 		}
 		
 		private function CorrecteFunc()

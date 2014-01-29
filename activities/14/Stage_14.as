@@ -77,6 +77,7 @@
 		
 		private function dragFunc(e:MouseEvent):void
 		{
+			e.currentTarget.parent.setChildIndex(DisplayObject(e.currentTarget),  e.currentTarget.parent.numChildren-1)
 			startingPosX = e.currentTarget.x
 			startingPosY = e.currentTarget.y
 			e.currentTarget.startDrag();
@@ -172,6 +173,7 @@
 			allObjects.y = _stageHeight / 2;
 			allObjects.height = _stageHeight / 1.5;
 			allObjects.scaleX = allObjects.scaleY;
+			dispatchEvent(new DataEvent(DataEvent.DATA, false, false, "ButtonVisibleTrue"));
 		}
 		
 		
@@ -202,8 +204,9 @@
 		
 		private function exit(e:*):void
 		{
-			dispatchEvent(new DataEvent(DataEvent.DATA, false, false, "endOfScene"));
-			trace(dispatchEvent)
+			dispatchEvent(new DataEvent(DataEvent.DATA, false, false, "ButtonVisibleFalse"));
+			dispatchEvent(new DataEvent(DataEvent.DATA, false, false, "endOfGame"));
+			trace(dispatchEvent);
 		}
 		
 		private function CorrecteFunc()
