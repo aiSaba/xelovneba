@@ -6,6 +6,8 @@
 	import flash.events.MouseEvent;
 	import flash.geom.ColorTransform;
 	import com.greensock.*;
+	import flash.geom.Point;
+	import flash.ui.Mouse;
 	
 	public class PaintFlower extends MovieClip
 	{
@@ -147,8 +149,19 @@
 		
 		private function mouseMoveHandler(ev:MouseEvent):void
 		{
-			sunFlower.paintbox.x = ev.stageX - sunFlower.width / 2 - 1.5 * sunFlower.paintbox.paintcolor.width;
-			sunFlower.paintbox.y = ev.stageY - sunFlower.height / 2 - sunFlower.paintbox.paintcolor.height / 2;
+			
+			////რაღაც გამოვიდა
+			
+			var point:Point = new Point(sunFlower.mouseX,sunFlower.mouseY);
+			var nPoint:Point=Controller.STAGE.globalToLocal(point);
+			
+		
+			sunFlower.paintbox.x = nPoint.x-sunFlower.paintbox.width/2;
+			sunFlower.paintbox.y = nPoint.y;
+			
+			Mouse.hide();
+			
+			ev.updateAfterEvent();
 		}
 		
 		private function ChangePictureColor(e:MouseEvent):void

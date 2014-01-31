@@ -2,6 +2,7 @@
 	
 	import flash.display.MovieClip;
 	import flash.display.DisplayObject;
+	import flash.display.Stage;
 	import flash.events.DataEvent;
 	import flash.events.Event;
 	import flash.events.MouseEvent;
@@ -15,6 +16,8 @@
 		private var paintPortrate:PaintPortrait
 		private var _stageWidth:Number;
 		private var _stageHeight:Number;
+		
+		public static var STAGE:Stage
 		
 		public function Controller() 
 		{
@@ -32,6 +35,8 @@
 		{
 			_stageWidth = stage.stageWidth;
 			_stageHeight = stage.stageHeight;
+			
+			STAGE = stage;
 			
 			controller.x =_stageWidth / 2;
 			controller.y = _stageHeight / 2;
