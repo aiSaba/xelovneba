@@ -17,6 +17,7 @@
 		private var _stageHeight:Number;
 		private var old_X:Number;
 		private var old_Y:Number;
+		private var colorBox:MovieClip;
 		
 		public function PaintFishMan(_stageWidth, _stageHeight, fishManPaint)
 		{
@@ -86,34 +87,38 @@
 			fishManPaint.fishbox.addEventListener(MouseEvent.MOUSE_DOWN, ChangePictureColor);
 			fishManPaint.hat.addEventListener(MouseEvent.MOUSE_DOWN, ChangePictureColor);
 			fishManPaint.palitr.alpha = 0;
-			fishManPaint.palitrbutton.addEventListener(MouseEvent.MOUSE_DOWN, ShowPalitr);
-			//addEventListener(MouseEvent.MOUSE_MOVE, changePoint);
-			//fishManPaint.paintbox.paintcolor.addEventListener(MouseEvent.MOUSE_MOVE, changePoint);
+			fishManPaint.palitrbutton.addEventListener(MouseEvent.MOUSE_DOWN, ShowPalitr);			
 			fishManPaint.takepoto.addEventListener(MouseEvent.MOUSE_DOWN, goHome);
 			fishManPaint.paintbox.addEventListener(MouseEvent.MOUSE_DOWN, changePointClick);
+			colorBox = new PaintBox();
+			colorBox.width = colorBox.width / 2;
+			colorBox.height = colorBox.height / 2;
+			
 		}
 		
 		private function closeBoxFunc(e:MouseEvent):void
 		{
-			trace("asd")
-			fishManPaint.paintbox.x = old_X;
-			fishManPaint.paintbox.y = old_Y;
-			trace(old_X);
-			trace(old_Y);
+		
+			fishManPaint.paintbox.visible = true;
+			removeChild(colorBox);
+			Mouse.show();
 			stage.removeEventListener(MouseEvent.MOUSE_MOVE, mouseMoveHandler);
 		}
 		
 		private function changePointClick(e:MouseEvent):void
 		{
-			//Mouse.hide();
+			addChild(colorBox);			
+			Mouse.hide();
+			fishManPaint.paintbox.visible = false;
+			Mouse.hide();
 			stage.addEventListener(MouseEvent.MOUSE_MOVE, mouseMoveHandler);
 		}
 		
-		private function mouseMoveHandler(ev:MouseEvent):void
+		private function mouseMoveHandler(e:MouseEvent):void
 		{
-			fishManPaint.paintbox.x = ev.stageX - fishManPaint.width / 2 - 2*fishManPaint.paintbox.paintcolor.width ;
-			fishManPaint.paintbox.y = ev.stageY - fishManPaint.height / 2 - fishManPaint.paintbox.paintcolor.height ;
-		}
+			colorBox.x = e.stageX - colorBox.width / 2 //+ 20;
+			colorBox.y = e.stageY - colorBox.height / 2 + 6;
+		}	
 		
 		private function goHome(e:MouseEvent):void
 		{
@@ -241,7 +246,7 @@
 		private function colors():void
 		{
 			fishManPaint.palitr.colors.transform.colorTransform = color;
-			fishManPaint.paintbox.paintcolor.transform.colorTransform = color;
+			colorBox.paintcolor.transform.colorTransform = color;
 		}
 		
 		private function ShowPalitr(e:MouseEvent):void

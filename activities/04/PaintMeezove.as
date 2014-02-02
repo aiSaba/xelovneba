@@ -18,6 +18,7 @@ package
 		private var _stageHeight:Number;
 		private var old_X:Number;
 		private var old_Y:Number;
+		private var colorBox:MovieClip;
 		
 		public function PaintMeezove(_stageWidth, _stageHeight, meezovePaint)
 		{
@@ -96,33 +97,37 @@ package
 			meezovePaint.shoes.addEventListener(MouseEvent.MOUSE_DOWN, ChangePictureColor); //*shoes
 			meezovePaint.palitr.alpha = 0;
 			meezovePaint.palitrbutton.addEventListener(MouseEvent.MOUSE_DOWN, ShowPalitr);
-			//addEventListener(MouseEvent.MOUSE_MOVE, changePoint);
 			meezovePaint.paintbox.addEventListener(MouseEvent.MOUSE_DOWN, changePointClick);
 			meezovePaint.takepoto.addEventListener(MouseEvent.MOUSE_DOWN, goHome)
+			colorBox = new PaintBox();
+			colorBox.width = colorBox.width / 2;
+			colorBox.height = colorBox.height / 2;
+			
 		}
 		
 		private function closeBoxFunc(e:MouseEvent):void
 		{
-			trace("asd")
-			meezovePaint.paintbox.x = old_X;
-			meezovePaint.paintbox.y = old_Y;
-			trace(old_X);
-			trace(old_Y);
+		
+			meezovePaint.paintbox.visible = true;
+			removeChild(colorBox);
+			Mouse.show();
 			stage.removeEventListener(MouseEvent.MOUSE_MOVE, mouseMoveHandler);
 		}
 		
 		private function changePointClick(e:MouseEvent):void
 		{
-			
-			//Mouse.hide();
+			addChild(colorBox);			
+			Mouse.hide();
+			meezovePaint.paintbox.visible = false;
+			Mouse.hide();
 			stage.addEventListener(MouseEvent.MOUSE_MOVE, mouseMoveHandler);
 		}
 		
-		private function mouseMoveHandler(ev:MouseEvent):void
+		private function mouseMoveHandler(e:MouseEvent):void
 		{
-			meezovePaint.paintbox.x = ev.stageX - meezovePaint.width / 2// - meezovePaint.paintbox.paintcolor.width;
-			meezovePaint.paintbox.y = ev.stageY - meezovePaint.height / 2// -  meezovePaint.paintbox.paintcolor.height/2 ;
-		}
+			colorBox.x = e.stageX - colorBox.width / 2 //+ 20;
+			colorBox.y = e.stageY - colorBox.height / 2 + 6;
+		}	
 		
 		private function goHome(e:MouseEvent):void
 		{
@@ -256,7 +261,7 @@ package
 		private function colors():void
 		{
 			meezovePaint.palitr.colors.transform.colorTransform = color;
-			meezovePaint.paintbox.paintcolor.transform.colorTransform = color;
+			colorBox.paintcolor.transform.colorTransform = color;
 		}
 		
 		private function ShowPalitr(e:MouseEvent):void

@@ -88,7 +88,11 @@
 			crossWord = new CrossWord();
 			crossWord.x = _Width / 2;
 			crossWord.y = _Height / 2;
+<<<<<<< HEAD
+			crossWord.height = _Height / 1.3;
+=======
 			crossWord.height = _Height / 1.2;
+>>>>>>> f28bf145a40c148216b2e4f6b93dd54a9150fe76
 			crossWord.scaleX = crossWord.scaleY;
 			addChild(crossWord);
 			
@@ -203,8 +207,12 @@
 		}
 		private function TheEnd():void 
 		{
+<<<<<<< HEAD
+			if (count == 37)
+=======
 			
 			if (count == 41)
+>>>>>>> f28bf145a40c148216b2e4f6b93dd54a9150fe76
 			{
 				soundControl1 = new SoundControl();
 				addChild(soundControl1);

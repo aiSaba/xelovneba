@@ -90,7 +90,11 @@
 			crossWord = new CrossWord();
 			crossWord.x = _Width / 2;
 			crossWord.y = _Height / 2;
+<<<<<<< HEAD
+			crossWord.height = _Height / 1.3;
+=======
 			crossWord.height = _Height / 1.2;
+>>>>>>> f28bf145a40c148216b2e4f6b93dd54a9150fe76
 			crossWord.scaleX = crossWord.scaleY;
 			addChild(crossWord);
 			
@@ -144,7 +148,11 @@
 			AlphaNull(NaturmortiText);//
 			AlphaNull(GrafikaText);//
 			
+<<<<<<< HEAD
+			for (var j:int = 1; j < 9; j++) 
+=======
 			for (var j:int = 1; j <= 8; j++) 
+>>>>>>> f28bf145a40c148216b2e4f6b93dd54a9150fe76
 			{
 				crossWord['h' + j + 'text'].visible = false;
 				crossWord['h'+j].addEventListener(MouseEvent.MOUSE_DOWN, ShowHelp)
@@ -259,7 +267,11 @@
 		private function ShowHelp(e:MouseEvent):void 
 		{
 			
+<<<<<<< HEAD
+			for (var i:int = 1; i <= 8; i++) 
+=======
 			for (var i:int = 1; i <= 7; i++) 
+>>>>>>> f28bf145a40c148216b2e4f6b93dd54a9150fe76
 			{
 				if (e.currentTarget.name == ['h' + i] )
 				{

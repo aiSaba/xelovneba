@@ -42,8 +42,7 @@
 			dispatchEvent(new DataEvent(DataEvent.DATA, false, false , "ButtonVisibleTrue"));
 			startButtons.zebrabutton.addEventListener(MouseEvent.MOUSE_DOWN, addZebraHandler)
 			startButtons.fishmanbutton.addEventListener(MouseEvent.MOUSE_DOWN, addManHandler)
-			startButtons.meezovebutton.addEventListener(MouseEvent.MOUSE_DOWN, addMeezoveHandler)
-			startButtons.next.addEventListener(MouseEvent.MOUSE_DOWN, endGame);
+			startButtons.meezovebutton.addEventListener(MouseEvent.MOUSE_DOWN, addMeezoveHandler)			
 		}
 		
 		private function addZebraHandler(e:MouseEvent):void 
@@ -91,24 +90,11 @@
 			}
 			if (e.data == "MovrchiMeezoves")
 			{
-				trace("asd")
 				startButtons.visible = true;
 				meezovePaint.visible = false;
 				removeChild(paintMeezoveClass)
 				paintMeezoveClass = null;
 			}
-			
-		}
-		
-		
-		
-		private function endGame(e:MouseEvent):void
-		{
-			startButtons.visible = false;
-			dispatchEvent(new DataEvent(DataEvent.DATA, false, false , "ButtonVisibleFalse"));
-			var qula:Number = new Number();
-			qula = 5;
-			dispatchEvent(new DataEvent(DataEvent.DATA, false, false, "endOfGame|" + qula.toString() ));
 			
 		}
 	}
