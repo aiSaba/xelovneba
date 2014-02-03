@@ -190,9 +190,9 @@
 			archeuliMasivi[ChosenElementIndex].x = _stageWidth / 2 - archeuliMasivi[ChosenElementIndex].width / 2;
 			archeuliMasivi[ChosenElementIndex].y = _stageHeight / 2 - archeuliMasivi[ChosenElementIndex].height / 1.5;
 			
-			if (archeuliMasivi[ChosenElementIndex].height > 400)
+			if (archeuliMasivi[ChosenElementIndex].height > 300)
 			{
-				archeuliMasivi[ChosenElementIndex].height = 350
+				archeuliMasivi[ChosenElementIndex].height = 300
 				archeuliMasivi[ChosenElementIndex].scaleX = archeuliMasivi[ChosenElementIndex].scaleY;
 				archeuliMasivi[ChosenElementIndex].x = _stageWidth / 2 - archeuliMasivi[ChosenElementIndex].width / 2;
 				archeuliMasivi[ChosenElementIndex].y = _stageHeight / 2 - archeuliMasivi[ChosenElementIndex].height / 1.5;
