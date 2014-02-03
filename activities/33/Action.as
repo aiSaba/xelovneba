@@ -51,6 +51,7 @@
 		private function addObjects():void
 		{
 			mainMc.continueMc.addEventListener(MouseEvent.MOUSE_DOWN, destroy);
+			mainMc.continueMc.visible = false;
 			mainMc.ornamentMc.visible = false;
 			obj_1 = new Obj_1() as MovieClip;
 			obj_2 = new Obj_2() as MovieClip;

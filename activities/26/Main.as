@@ -55,15 +55,7 @@
 			Main_Mc.picture.TackePic.addEventListener(MouseEvent.MOUSE_DOWN, goHome);
 			
 			
-<<<<<<< HEAD
 		}	
-=======
-			dispatchEvent(new DataEvent(DataEvent.DATA, false, false, "ButtonVisibleFalse"));
-			qula = 5
-			dispatchEvent(new DataEvent(DataEvent.DATA, false, false, "endOfGame|" + qula.toString() ));
-			Destroy();
-		}
->>>>>>> f28bf145a40c148216b2e4f6b93dd54a9150fe76
 		
 		private function closeBoxFunc(e:MouseEvent):void 
 		{
@@ -88,22 +80,8 @@
 		}
 		private function goHome(e:MouseEvent):void
 		{
-			var jpg:Raghats = new Raghats(stage);
-			jpg.addEventListener(DataEvent.DATA, jpgListener);
-			
-<<<<<<< HEAD
+			var jpg:Raghats = new Raghats(stage);			
 		}	
-=======
-		}
-		
-		private function jpgListener(e:DataEvent):void 
-		{
-			dispatchEvent(new DataEvent(DataEvent.DATA, false, false, "ButtonVisibleFalse"));
-			qula = 5
-			dispatchEvent(new DataEvent(DataEvent.DATA, false, false, "endOfGame|" + qula.toString() ));
-			Destroy();
-		}
->>>>>>> f28bf145a40c148216b2e4f6b93dd54a9150fe76
 		private function Destroy():void 
 		{
 			
@@ -112,7 +90,6 @@
 			Main_Mc.visible = false;
 			Main_Mc.picture.closebox.removeEventListener(MouseEvent.MOUSE_DOWN, closeBoxFunc);
 			Main_Mc.picture.TackePic.removeEventListener(MouseEvent.MOUSE_DOWN, goHome);
-			Main_Mc.picture.gagrdzeleba.removeEventListener(MouseEvent.MOUSE_DOWN, EndOfGame);
 			Main_Mc.picture.colortrans.addEventListener(MouseEvent.MOUSE_DOWN, changePointClick);
 			if (colorBox)
 			{

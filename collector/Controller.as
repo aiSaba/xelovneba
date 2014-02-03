@@ -75,8 +75,11 @@ package
 			button.visible = false;
 			soundOn = true;
 			
-			swfArray = [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 
-						22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35];
+			swfArray = [ '1_1', 1, '2_1', 2, '3_1', 3, '4_1', 4, '5_1', 5, '6_1', 6, '7_1', 7, 
+						'8_1', 8, '9_1', 9, '10_1', 10, '11_1', 11, "12_1", 12, '13_1',  13, '14_1',
+						14, '15_1', 15, '16_1', 16,'17_1', 17, '18-1', 18,'19_1', 19, '20_1', 20,'21_1', 21, 
+						'22_1', 22, '23_1', 23, '24_1', 24, '25_1', 25, '26_1', 26, '27_1', 27, '28_1', 28, '29_1', 29, 
+						'30_1', 30, '31_1',31, '32_1', 32, '33_1', 33, '34_1',  34, '35_1', 35];
 			
 			swfIndex = Settings.POSITION + 1;
 			allScore = Settings.SCORE;
@@ -293,18 +296,13 @@ package
 			
 			allSheet.x = stageW / 2;
 			allSheet.y = stageH / 2;
-			/*allSheet.x = (stageW - allSheet.width) / 2;
-			 allSheet.y = (stageH - allSheet.height) / 2;*/
 			
 			addChild(allSheet);
-			
-			//allSheet.close_mc.addEventListener(MouseEvent.MOUSE_DOWN, closeSheet);
 			
 			var item:MovieClip;
 			for (var i:int = 1; i <= 35; i++)
 			{
 				item = allSheet.getChildByName("mc_" + i.toString()) as MovieClip;
-				//item.num_txt.text = i.toString();
 				item.addEventListener(MouseEvent.MOUSE_DOWN, gameLevelAction, false, 0, true);
 			}
 			allSheet.home_button.addEventListener(MouseEvent.MOUSE_DOWN, homeFunc);
@@ -347,7 +345,7 @@ package
 		{
 			button.visible = true;
 			var item:MovieClip;
-			for (var i:int = 1; i <= 16; i++)
+			for (var i:int = 1; i <= 35; i++)
 			{
 				item = allSheet.getChildByName("mc_" + i.toString()) as MovieClip;
 				item.num_txt.text = i.toString();
@@ -362,7 +360,7 @@ package
 		{
 			button.visible = true;
 			var item:MovieClip;
-			for (var i:int = 1; i <= 16; i++)
+			for (var i:int = 1; i <= 35; i++)
 			{
 				item = allSheet.getChildByName("mc_" + i.toString()) as MovieClip;
 				//item.num_txt.text = i.toString();
@@ -371,13 +369,13 @@ package
 			
 			removeChild(allSheet);
 			allSheet = null;
-			swfIndex = Number(e.currentTarget.name.substr(3));
-			trace('swfIndex', swfIndex)
+			swfIndex = Number(e.currentTarget.name.substr(3))
 			button.visible = false;
 			
 			try
 			{
-				swfIndex--;
+				swfIndex *= 2;
+				swfIndex-=2;
 				loadSwf();
 				removeChild(loadedContent);
 				loader.unloadAndStop();
