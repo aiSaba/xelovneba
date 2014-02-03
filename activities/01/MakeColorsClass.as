@@ -80,7 +80,7 @@ package
 			mainObjects_mc.x = _stageWidth / 2;
 			mainObjects_mc.y = _stageHeight / 2;
 			
-			mainObjects_mc.height = _stageHeight / 1.2;
+			mainObjects_mc.height = _stageHeight / 1.5;
 			mainObjects_mc.scaleX = mainObjects_mc.scaleY;
 			/////////initialize objects
 			//patara ferebi

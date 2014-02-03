@@ -13,8 +13,7 @@
 	<text xml:lang="fr">French App name goes here</text>
 	<text xml:lang="ja">Japanese App name goes here</text>
 	</name>
--->
-<application xmlns="http://ns.adobe.com/air/application/3.2">
+--><application xmlns="http://ns.adobe.com/air/application/3.2">
   <id>app1</id>
   <versionNumber>1.0</versionNumber>
   <filename>app1</filename>
