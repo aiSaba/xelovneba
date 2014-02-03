@@ -14,6 +14,9 @@
 		private var thirdStageMc:MovieClip;
 		private var zgarbi:MovieClip;
 		private var textFrame:MovieClip;
+		private var textFrame_2:MovieClip;
+		private var textFrame_3:MovieClip;
+		private var textFrame_4:MovieClip;
 		private var _stageWidth:Number;
 		private var _stageHeight:Number;
 		private var soundControl1:SoundControl;
@@ -47,10 +50,16 @@
 			
 			zgarbi = firstZgarbi.zgarbi;
 		    textFrame = firstZgarbi.textFrame;
+			textFrame_2 = firstZgarbi.textFrame_2;
+			textFrame_3 = firstZgarbi.textFrame_3;
+			textFrame_4 = firstZgarbi.textFrame_4;
 			frame = firstZgarbi.frame;
 			
 			zgarbi.alpha = 0;
 			textFrame.alpha = 0;
+			textFrame_2.alpha = 0;
+			textFrame_3.alpha = 0;
+			textFrame_4.alpha = 0;
 			frame.alpha = 0;
 			
 			
@@ -71,13 +80,36 @@
 			soundControl1.loadSound("16.mp3", 1);
 			soundControl1.soundPlay();
 			TweenMax.to(frame, 0.5, { alpha:1 } );
-			TweenMax.to(textFrame, 0.5, { alpha:1 , onComplete:waitFunc} );
+			TweenMax.to(textFrame, 0.5, { alpha:1 , onComplete:waitFunc } );
 			
+			setTimeout(becomeInvisible, 6000, textFrame);
+			
+			setTimeout(becomeVisible, 6001, textFrame_2);
+			setTimeout(becomeInvisible, 12000, textFrame_2);
+			
+			setTimeout(becomeVisible, 12001, textFrame_3);
+			setTimeout(becomeInvisible, 21000, textFrame_3);
+			
+			setTimeout(becomeVisible, 21001, textFrame_4);
+			
+			
+			
+			
+			
+		}
+		
+		private function becomeInvisible(object):void
+		{
+			object.alpha = 0;
+		}
+		private function becomeVisible(object):void
+		{
+			object.alpha = 1;
 		}
 		
 		private function waitFunc():void
 		{			
-			setTimeout(next, 4000)
+			setTimeout(next, 24500)
 		}
 		private function next ():void
 		{	
@@ -93,6 +125,9 @@
 			firstZgarbi.visible = false;
 			TweenMax.killTweensOf(zgarbi);
 			TweenMax.killTweensOf(textFrame);
+			TweenMax.killTweensOf(textFrame_2);
+			TweenMax.killTweensOf(textFrame_3);
+			TweenMax.killTweensOf(textFrame_4);
 			
 			if (soundControl1)
 			{
