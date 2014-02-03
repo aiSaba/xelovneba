@@ -64,6 +64,7 @@
 				Graphic_paintObjectsArray[i].addEventListener(MouseEvent.MOUSE_DOWN, dragFunc);
 				Graphic_paintObjectsArray[i].addEventListener(MouseEvent.MOUSE_UP, dragStopFunc);
 				Graphic_paintObjectsArray[i].text_name.visible = false;
+				Graphic_paintObjectsArray[i].buttonMode = true;
 			}
 			
 			for (var k:int = 0; k < Perwera_paintObjectsArray.length; k++)
@@ -71,7 +72,8 @@
 				Perwera_paintObjectsArray[k].addEventListener(MouseEvent.MOUSE_DOWN, dragFunc);
 				Perwera_paintObjectsArray[k].addEventListener(MouseEvent.MOUSE_UP, dragStopFuncNoDrop);
 				Perwera_paintObjectsArray[k].text_name.visible = false;
-			}
+				Perwera_paintObjectsArray[k].buttonMode = true;
+				}
 		
 		}
 		
@@ -82,7 +84,7 @@
 			startingPosY = e.currentTarget.y
 			e.currentTarget.startDrag();
 			e.currentTarget.text_name.visible = true
-			setTimeout(TextNameCaller, 1500)
+			
 			for (var i:int = 0; i < Graphic_paintObjectsArray.length; i++)
 			{
 				if (e.currentTarget.name == Graphic_paintObjectsArray[i].name)
@@ -130,6 +132,7 @@
 				TweenLite.to(e.currentTarget, 0.5, {x: startingPosX, y: startingPosY});
 				
 			}
+			setTimeout(TextNameCaller, 1000)
 		
 		}
 		
@@ -139,6 +142,7 @@
 			TweenLite.to(e.currentTarget, 0.5, { x: startingPosX, y: startingPosY } );
 			TweenMax.to(e.currentTarget, 1, { glowFilter: { color:0xff0000, alpha:1, blurX:15, blurY:15, strength:3,delay:1.5 , remove:true }} );
 				FalseFunc();
+				setTimeout(TextNameCaller, 1000)
 		}
 		
 		private function dropIn(e:MouseEvent):void
