@@ -22,10 +22,9 @@
 		private var _stageWidth:Number;
 		private var _stageHeight:Number;		
 		
-		public function Skulptura(_stageWidth:Number = 1024, _stageHeight:Number = 768)
+		public function Skulptura()
 		{
-			this._stageHeight = _stageHeight;
-			this._stageWidth = _stageWidth;
+			
 			addEventListener(Event.ADDED_TO_STAGE, init);
 		}
 		
@@ -37,19 +36,18 @@
 		private function YvelaferiFunc(): void
 		{
 			Igrafics = new IGrafics();
+			_stageHeight = stage.stageHeight;
+			_stageWidth = stage.stageWidth;
 			addChild(Igrafics);
 			Igrafics.x = _stageWidth / 2;
 			Igrafics.y = _stageHeight / 2 ;
-			Igrafics.height = _stageHeight/1.5;
+			Igrafics.height = _stageHeight / 1.4;
 			Igrafics.scaleX = Igrafics.scaleY;
 			dispatchEvent(new DataEvent(DataEvent.DATA, false, false, "ButtonVisibleTrue"));
 			pirveliStage();
 		}
 		
-		
-		
-		
-		private function pirveliStage(_stageWidth:Number = 1024, _stageHeight:Number = 768):void
+		private function pirveliStage():void
 		{	
 			IpicsGrap = new IPicsGrap();
 			addChild(IpicsGrap);
@@ -150,7 +148,7 @@
 			addChild(IIpicsGrap);
 			IIpicsGrap.x =  _stageWidth / 2;
 			IIpicsGrap.y = _stageHeight / 2;
-			IIpicsGrap.height = _stageHeight/1.5;
+			IIpicsGrap.height = _stageHeight/1.4;
 			IIpicsGrap.scaleX = IIpicsGrap.scaleY;
 			
 			
@@ -260,7 +258,7 @@
 			addChild(IIIpicsGrap);
 			IIIpicsGrap.x =  _stageWidth / 2;
 			IIIpicsGrap.y = _stageHeight / 2;
-			IIIpicsGrap.height = _stageHeight/1.5;
+			IIIpicsGrap.height = _stageHeight/1.4;
 			IIIpicsGrap.scaleX = IIIpicsGrap.scaleY;
 			
 			IIIpicsGrap._3Grafic_1.addEventListener(MouseEvent.MOUSE_DOWN, _3showFunc_1);
