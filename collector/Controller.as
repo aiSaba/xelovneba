@@ -19,6 +19,7 @@ package
 	import flash.text.TextField;
 	import flash.text.TextFieldAutoSize;
 	import flash.text.TextFormat;
+	import flash.ui.Mouse;
 	
 	public class Controller extends MovieClip
 	{
@@ -79,7 +80,7 @@ package
 						'8_1', 8, '9_1', 9, '10_1', 10, '11_1', 11, "12_1", 12, '13_1',  13, '14_1',
 						14, '15_1', 15, '16_1', 16,'17_1', 17, '18_1', 18,'19_1', 19, '20_1', 20,'21_1', 21, 
 						'22_1', 22, '23_1', 23, '24_1', 24, '25_1', 25, '26_1', 26, '27_1', 27, '28_1', 28, '29_1', 29, 
-						'30_1', 30, '31_1',31, '32_1', 32, '33_1', 33, '34_1',  34, '35_1', 35];
+						'30_1', 30, '31_1',31, '32_1', 32, '33_1', 33, '34_1',  34, '35_1', 35, 36];
 			
 			swfIndex = Settings.POSITION + 1;
 			allScore = Settings.SCORE;
@@ -89,7 +90,7 @@ package
 		private function loadSwf():void
 		{
 			loader = new Loader();
-			
+			Mouse.show();
 			var context:LoaderContext = new LoaderContext();
 			var current:ApplicationDomain = ApplicationDomain.currentDomain;
 			context.applicationDomain = new ApplicationDomain();
@@ -148,7 +149,7 @@ package
 				loadSwf();
 				
 			}
-			if (e.data == "The End")
+			/*if (e.data == "The End")
 			{
 				
 				loader.unloadAndStop();
@@ -167,8 +168,20 @@ package
 				addChild(myText);
 				
 				myText.autoSize = TextFieldAutoSize.CENTER;
+			}*/
+
+			if (e.data == "exit")
+			{
+				exitFunc(null);
 			}
-			
+			if (e.data == "home") 
+			{
+				homeFunc(null);
+			}
+			if (e.data == "authors") 
+			{
+				authorsFunc(null);
+			}
 			if (e.data == "ButtonVisibleTrue")
 			{
 				button.visible = true;
@@ -313,7 +326,10 @@ package
 		
 		private function authorsFunc(e:MouseEvent):void 
 		{
-			removeChild(allSheet);
+			if (allSheet)
+			{
+				removeChild(allSheet);
+			}
 			lastPage = new LastPage();
 			lastPage.x = stageW / 2;
 			lastPage.y = stageH / 2;
@@ -324,6 +340,7 @@ package
 		private function closeLastPage(e:MouseEvent):void 
 		{
 			removeChild(lastPage);
+			if(allSheet)
 			addChild(allSheet);
 		}
 		
@@ -335,15 +352,21 @@ package
 		
 		private function homeFunc(e:MouseEvent):void
 		{
+			if (button)
+			{
 			button.removeEventListener(DataEvent.DATA, buttonsListener);
 			removeChild(button);
+			}
+			if(allSheet)
 			removeChild(allSheet);
 			loader.unloadAndStop();
+			removeChild(loadedContent)
 			dispatchEvent(new DataEvent(DataEvent.DATA, false, false, "HomeClick"));
 		}
 		
 		private function closeSheet(e:MouseEvent):void
 		{
+			if(button)
 			button.visible = true;
 			var item:MovieClip;
 			for (var i:int = 1; i <= 35; i++)

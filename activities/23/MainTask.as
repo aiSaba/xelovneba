@@ -18,6 +18,7 @@
 		
 		private var _stageHeight:Number;
 		private var _stageWidth:Number;
+		private var counter:Number = 0;
 		
 		public function MainTask(_stageHeight, _stageWidth)
 		{
@@ -54,14 +55,36 @@
 			all.height = _stageHeight / 1.5;
 			all.scaleX = all.scaleY;
 			addChild(all);
-			for (var i:int = 1; i <= 13; i++)
+			for (var i:int = 1; i <= 14; i++)
 			{
-				all['obj_' + i].addEventListener(MouseEvent.MOUSE_DOWN, cloneFunc);		
+				all['obj_' + i].addEventListener(MouseEvent.MOUSE_DOWN, cloneFunc);
+				all['obj_' + i].buttonMode = true;
 			}
 			all.takePhoto.addEventListener(MouseEvent.MOUSE_DOWN, takePhotoFunc);
+			all.zoomIn.addEventListener(MouseEvent.MOUSE_DOWN, zoomInFunc);
+			all.zoomOut.addEventListener(MouseEvent.MOUSE_DOWN, zoomOutFunc);
 		}
 		
-		private function butVis():void 
+		private function zoomOutFunc(e:MouseEvent):void
+		{
+			for (var i:int = 1; i <= counter; i++)
+			{
+				all.board.getChildAt(i).scaleX = 1;
+				all.board.getChildAt(i).scaleY = 1;
+			}
+		
+		}
+		
+		private function zoomInFunc(e:MouseEvent):void
+		{
+			for (var i:int = 1; i <= counter; i++)
+			{
+				all.board.getChildAt(i).scaleX = 1.5;
+				all.board.getChildAt(i).scaleY = 1.5;
+			}
+		}
+		
+		private function butVis():void
 		{
 			dispatchEvent(new DataEvent(DataEvent.DATA, false, false, "ButtonVisibleTrue"));
 		}
@@ -78,13 +101,14 @@
 		
 		private function cloneFunc(e:MouseEvent):void
 		{
+			counter++;
 			var mc:MovieClip;
 			switch (e.currentTarget.name)
 			{
 				case 'obj_1': 
 					mc = new Obj_1();
 					break;
-				case 'obj_2':
+				case 'obj_2': 
 					mc = new Obj_2();
 					break;
 				case 'obj_3': 
@@ -99,7 +123,7 @@
 				case 'obj_6': 
 					mc = new Obj_6();
 					break;
-				case 'obj_7':
+				case 'obj_7': 
 					mc = new Obj_7();
 					break;
 				case 'obj_8': 
@@ -120,11 +144,14 @@
 				case 'obj_13': 
 					mc = new Obj_13();
 					break;
+				case 'obj_14': 
+					mc = new Obj_14();
+					break;
 			}
 			mc.addEventListener(MouseEvent.MOUSE_DOWN, startDragFunc);
 			mc.addEventListener(MouseEvent.MOUSE_UP, stopDragFunc);
 			coordinateMc(mc);
-			all.addChild(mc);
+			all.board.addChild(mc);
 		}
 		
 		private function takePhotoFunc(e:MouseEvent):void
@@ -147,8 +174,8 @@
 		
 		private function coordinateMc(mc:MovieClip):void
 		{
-			mc.x = mouseX - _stageWidth/2;
-			mc.y = mouseY-_stageHeight/2;
+			mc.x = mouseX - _stageWidth / 2;
+			mc.y = mouseY - _stageHeight / 2;
 		}
 	
 	}

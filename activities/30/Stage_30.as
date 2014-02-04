@@ -59,7 +59,7 @@
 		private var peizaji_8:MovieClip;
 		private var peizaji_9:MovieClip;
 		
-		public function Stage_30(_stageWidth:Number = 1024, _stageHeight:Number = 768)
+		public function Stage_30()
 		{
 			this._stageHeight = _stageHeight;
 			this._stageWidth = _stageWidth;
@@ -74,7 +74,8 @@
 		
 		private function allFunc():void
 		{
-			
+			_stageWidth = stage.stageWidth;
+			_stageHeight = stage.stageHeight;
 			addStage();
 			
 			nat_1 = new Nat_1();

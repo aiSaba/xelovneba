@@ -17,10 +17,8 @@
 		private var textArray:Array;
 		private var soundControl:SoundControl;
 		
-		public function Ferweraa(_stageWidth:Number = 1024, _stageHeight:Number = 768)
+		public function Ferweraa()
 		{
-			this._stageHeight = _stageHeight;
-			this._stageWidth = _stageWidth;
 			addEventListener(Event.ADDED_TO_STAGE, init);
 		}
 		private function init(ev:Event):void
@@ -31,6 +29,8 @@
 		private function YvelaferiFunc(): void
 		
 		{
+			_stageWidth = stage.stageWidth;
+			_stageHeight = stage.stageHeight;
 			ferwera = new Ferwera();
 			addChild(ferwera);
 			ferwera.x = _stageWidth / 2;

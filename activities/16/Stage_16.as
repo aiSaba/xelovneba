@@ -16,10 +16,8 @@
 		private var ObjectsArray:Array;
 		private var soundControl:SoundControl;
 		
-		public function Stage_16(_stageWidth:Number = 1024, _stageHeight:Number = 768)
+		public function Stage_16()
 		{
-			this._stageHeight = _stageHeight;
-			this._stageWidth = _stageWidth;
 			addEventListener(Event.ADDED_TO_STAGE, init);
 		}
 		
@@ -32,7 +30,8 @@
 		
 		private function allFunc():void
 		{
-			
+			_stageWidth = stage.stageWidth;
+			_stageHeight = stage.stageHeight;
 			addStage();
 			ObjectsArray = [allObjects.tixa_mc, allObjects.marmarilo_mc, allObjects.plastelini_mc, allObjects.xe_mc, allObjects.spilendzi_mc]
 			

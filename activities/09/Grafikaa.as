@@ -18,10 +18,9 @@
 		private var objectArray:Array;
 		private var soundControl:SoundControl;
 		
-		public function Grafikaa(_stageWidth:Number = 1024, _stageHeight:Number = 768)
+		public function Grafikaa()
 		{
-			this._stageHeight = _stageHeight;
-			this._stageWidth = _stageWidth;
+			
 			addEventListener(Event.ADDED_TO_STAGE, init);
 		}
 		private function init(ev:Event):void
@@ -32,6 +31,8 @@
 		private function YvelaferiFunc(): void
 		
 		{
+			_stageWidth = stage.stageWidth;
+			_stageHeight = stage.stageHeight;
 			grafika = new Grafika();
 			addChild(grafika);
 			grafika.x = _stageWidth / 2;

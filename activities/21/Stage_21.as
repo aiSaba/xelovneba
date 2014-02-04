@@ -68,10 +68,8 @@
 		private var perwera_8:MovieClip;
 		private var perwera_9:MovieClip;
 		
-		public function Stage_21(_stageWidth:Number = 1024, _stageHeight:Number = 768)
+		public function Stage_21()
 		{
-			this._stageHeight = _stageHeight;
-			this._stageWidth = _stageWidth;
 			addEventListener(Event.ADDED_TO_STAGE, init);
 		}
 		
@@ -83,7 +81,8 @@
 		
 		private function allFunc():void
 		{
-			
+			_stageWidth = stage.stageWidth;
+			_stageHeight = stage.stageHeight;
 			addStage();
 			
 			arc_1 = new Arc_1();

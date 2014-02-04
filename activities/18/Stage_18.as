@@ -33,10 +33,8 @@
 		
 
 		
-		public function Stage_18(_stageWidth:Number = 1024, _stageHeight:Number = 768)
+		public function Stage_18()
 		{
-			this._stageHeight = _stageHeight;
-			this._stageWidth = _stageWidth;
 			addEventListener(Event.ADDED_TO_STAGE, init);
 		}
 		
@@ -48,6 +46,8 @@
 		
 		private function allFunc():void
 		{
+			_stageWidth = stage.stageWidth;
+			_stageHeight = stage.stageHeight;
 			stage_1 = new Stage_1();
 			stage_2 = new Stage_2();
 			stage_3 = new Stage_3();

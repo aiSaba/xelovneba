@@ -28,10 +28,8 @@
 		
 		private var CorrectCounter:int;
 		
-		public function Stage_14(_stageWidth:Number = 1024, _stageHeight:Number = 768)
+		public function Stage_14()
 		{
-			this._stageHeight = _stageHeight;
-			this._stageWidth = _stageWidth;
 			addEventListener(Event.ADDED_TO_STAGE, init);
 		}
 		
@@ -44,7 +42,8 @@
 		
 		private function allFunc():void
 		{
-			
+			_stageWidth = stage.stageWidth;
+			_stageHeight = stage.stageHeight;
 			addStage();
 			Graphic_paintObjectsArray = [allObjects.nothing_mc, allObjects.brush_mc, allObjects.paper_mc, allObjects.sangina_mc, allObjects.guashi_mc, allObjects.akvareli_mc, allObjects.pasteli_mc, allObjects.pencil_mc];
 			Perwera_paintObjectsArray = [allObjects.palitra_mc, allObjects.oil_paint_mc, allObjects.molberti_mc, allObjects.tilo_mc, allObjects.oil_brush_mc];

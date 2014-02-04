@@ -46,7 +46,7 @@
 		private var colorArr:Array;
 		private var colorTranform:ColorTransform;
 		private var currentMc:MovieClip;
-		
+		private var counter:Number = 0;
 		public function MainTask(_stageHeight, _stageWidth)
 		{
 			this._stageHeight = _stageHeight;
@@ -115,6 +115,27 @@
 				objectsArray[i].addEventListener(MouseEvent.MOUSE_DOWN, addToScene);
 			}
 			mainObjects.takePhoto.addEventListener(MouseEvent.MOUSE_DOWN, takePhotoFunc);
+			mainObjects.zoomIn.addEventListener(MouseEvent.MOUSE_DOWN, zoomInFunc);
+			mainObjects.zoomOut.addEventListener(MouseEvent.MOUSE_DOWN, zoomOutFunc);
+		}
+		
+		private function zoomOutFunc(e:MouseEvent):void 
+		{
+			for (var i:int = 1; i <=counter; i++) 
+			{
+				mainObjects.board.getChildAt(i).scaleX = 1;
+				mainObjects.board.getChildAt(i).scaleY = 1;
+			}
+		
+		}
+		
+		private function zoomInFunc(e:MouseEvent):void 
+		{
+			for (var i:int = 1; i <=counter; i++) 
+			{
+				mainObjects.board.getChildAt(i).scaleX = 1.5;
+				mainObjects.board.getChildAt(i).scaleY = 1.5;
+			}
 		}
 		
 		private function butVisible():void 
@@ -160,45 +181,47 @@
 		
 		private function addToScene(e:MouseEvent):void
 		{
+			counter++;
 			switch (e.currentTarget)
 			{
 				case kvadrati: 
 					kvadrati1 = new Kvadrati();
-					addChild(kvadrati1);
+					mainObjects.board.addChild(kvadrati1);
 					coordinateMc(kvadrati1);
 					kvadrati1.addEventListener(MouseEvent.MOUSE_DOWN, startDragFunc)
 					kvadrati1.addEventListener(MouseEvent.MOUSE_UP, stopDragFunc);
 					break;
 				case martkutxedi: 
 					martkutxedi1 = new Martkutxedi();
-					addChild(martkutxedi1);
+					mainObjects.board.addChild(martkutxedi1);
 					coordinateMc(martkutxedi1);
 					martkutxedi1.addEventListener(MouseEvent.MOUSE_DOWN, startDragFunc)
 					martkutxedi1.addEventListener(MouseEvent.MOUSE_UP, stopDragFunc);
 					break;
 				case samkutxedi: 
 					samkutxedi1 = new Samkutxedi();
-					addChild(samkutxedi1);
+					mainObjects.board.addChild(samkutxedi1);
 					coordinateMc(samkutxedi1);
 					samkutxedi1.addEventListener(MouseEvent.MOUSE_DOWN, startDragFunc)
 					samkutxedi1.addEventListener(MouseEvent.MOUSE_UP, stopDragFunc);
 					break;
 				case rkali: 
 					rkali1 = new Rkali();
-					addChild(rkali1);
+					mainObjects.board.addChild(rkali1);
 					coordinateMc(rkali1);
 					rkali1.addEventListener(MouseEvent.MOUSE_DOWN, startDragFunc)
 					rkali1.addEventListener(MouseEvent.MOUSE_UP, stopDragFunc);
 					break;
 				case wre: 
 					wre1 = new Wre();
-					addChild(wre1);
+					mainObjects.board.addChild(wre1);
 					coordinateMc(wre1);
 					wre1.addEventListener(MouseEvent.MOUSE_DOWN, startDragFunc)
 					wre1.addEventListener(MouseEvent.MOUSE_UP, stopDragFunc);
 					break;
 			
 			}
+			
 		}
 		
 		private function takePhotoFunc(e:MouseEvent):void
@@ -223,8 +246,8 @@
 		
 		private function coordinateMc(mc:MovieClip):void
 		{
-			mc.x = mouseX;
-			mc.y = mouseY;
+			mc.x = mouseX-_stageWidth/2;
+			mc.y = mouseY-_stageHeight/2;
 		}
 		
 		private function startDragFunc(e:MouseEvent):void

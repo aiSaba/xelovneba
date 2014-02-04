@@ -27,10 +27,9 @@
 		private var Graphic_NameIndex:int
 		private var Perwera_NameIndex:int;
 		
-		public function Stage_15(_stageWidth:Number = 1024, _stageHeight:Number = 768)
+		public function Stage_15()
 		{
-			this._stageHeight = _stageHeight;
-			this._stageWidth = _stageWidth;
+
 			addEventListener(Event.ADDED_TO_STAGE, init);
 		}
 		
@@ -42,7 +41,8 @@
 		}
 		
 		private function allFunc():void
-		{
+		{_stageWidth = stage.stageWidth;
+			_stageHeight = stage.stageHeight;
 			
 			addStage();
 			Graphic_paintObjectsArray = [allObjects.nothing_mc, allObjects.brush_mc, allObjects.paper_mc, allObjects.sangina_mc, allObjects.guashi_mc, allObjects.akvareli_mc, allObjects.pasteli_mc, allObjects.pencil_mc];
