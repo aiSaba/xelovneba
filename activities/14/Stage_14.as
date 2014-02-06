@@ -84,7 +84,7 @@
 			startingPosY = e.currentTarget.y
 			e.currentTarget.startDrag();
 			e.currentTarget.text_name.visible = true
-			setTimeout(TextNameCaller, 1500)
+			setTimeout(TextNameCaller, 500)
 			for (var i:int = 0; i < Graphic_paintObjectsArray.length; i++)
 			{
 				if (e.currentTarget.name == Graphic_paintObjectsArray[i].name)
@@ -115,7 +115,7 @@
 		
 		private function dragStopFunc(e:MouseEvent):void
 		{
-
+			Graphic_paintObjectsArray[Graphic_NameIndex].removeEventListener(MouseEvent.MOUSE_UP, dragStopFunc);
 			if (e.currentTarget.paint_tool_mc.hitTestObject(allObjects.drop_site_mc))
 			{
 				for (var i:int = 0; i < Graphic_paintObjectsArray.length; i++)
@@ -139,6 +139,7 @@
 		
 		private function dragStopFuncNoDrop(e:MouseEvent):void
 		{
+			Perwera_paintObjectsArray[Perwera_NameIndex].removeEventListener(MouseEvent.MOUSE_UP, dragStopFuncNoDrop);
 			if (e.currentTarget.paint_tool_mc.hitTestObject(allObjects.drop_site_mc))
 			{
 				TweenMax.to(e.currentTarget, 1, { glowFilter: { color:0xff0000, alpha:1, blurX:15, blurY:15, strength:3,delay:1.5 , remove:true }} );
