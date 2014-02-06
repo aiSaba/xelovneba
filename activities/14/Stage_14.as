@@ -45,7 +45,7 @@
 			_stageWidth = stage.stageWidth;
 			_stageHeight = stage.stageHeight;
 			addStage();
-			Graphic_paintObjectsArray = [allObjects.nothing_mc, allObjects.brush_mc, allObjects.paper_mc, allObjects.sangina_mc, allObjects.guashi_mc, allObjects.akvareli_mc, allObjects.pasteli_mc, allObjects.pencil_mc];
+			Graphic_paintObjectsArray = [allObjects.nothing_mc, allObjects.paper_mc, allObjects.brush_mc,  allObjects.sangina_mc, allObjects.guashi_mc, allObjects.akvareli_mc, allObjects.pasteli_mc, allObjects.pencil_mc];
 			Perwera_paintObjectsArray = [allObjects.palitra_mc, allObjects.oil_paint_mc, allObjects.molberti_mc, allObjects.tilo_mc, allObjects.oil_brush_mc];
 			
 			amogdebulebisArray = []
@@ -61,22 +61,25 @@
 			for (var i:int = 0; i < Graphic_paintObjectsArray.length; i++)
 			{
 				Graphic_paintObjectsArray[i].addEventListener(MouseEvent.MOUSE_DOWN, dragFunc);
-				Graphic_paintObjectsArray[i].addEventListener(MouseEvent.MOUSE_UP, dragStopFunc);
+				//Graphic_paintObjectsArray[i].addEventListener(MouseEvent.MOUSE_UP, dragStopFunc);
 				Graphic_paintObjectsArray[i].text_name.visible = false;
+				Graphic_paintObjectsArray[i].buttonMode = true;
 			}
 			
 			for (var k:int = 0; k < Perwera_paintObjectsArray.length; k++)
 			{
 				Perwera_paintObjectsArray[k].addEventListener(MouseEvent.MOUSE_DOWN, dragFunc);
-				Perwera_paintObjectsArray[k].addEventListener(MouseEvent.MOUSE_UP, dragStopFuncNoDrop);
+				//Perwera_paintObjectsArray[k].addEventListener(MouseEvent.MOUSE_UP, dragStopFuncNoDrop);
 				Perwera_paintObjectsArray[k].text_name.visible = false;
+				Perwera_paintObjectsArray[k].buttonMode = true;
 			}
 		
 		}
 		
 		private function dragFunc(e:MouseEvent):void
 		{
-			e.currentTarget.parent.setChildIndex(DisplayObject(e.currentTarget),  e.currentTarget.parent.numChildren-1)
+			e.currentTarget.parent.setChildIndex(DisplayObject(e.currentTarget),  e.currentTarget.parent.numChildren - 1);
+			
 			startingPosX = e.currentTarget.x
 			startingPosY = e.currentTarget.y
 			e.currentTarget.startDrag();
@@ -86,7 +89,8 @@
 			{
 				if (e.currentTarget.name == Graphic_paintObjectsArray[i].name)
 				{
-					Graphic_NameIndex = i
+					Graphic_NameIndex = i;
+					Graphic_paintObjectsArray[Graphic_NameIndex].addEventListener(MouseEvent.MOUSE_UP, dragStopFunc);
 				}
 				
 			}
@@ -96,6 +100,7 @@
 				if (e.currentTarget.name == Perwera_paintObjectsArray[k].name)
 				{
 					Perwera_NameIndex = k
+					Perwera_paintObjectsArray[Perwera_NameIndex].addEventListener(MouseEvent.MOUSE_UP, dragStopFuncNoDrop);
 				}
 				
 			}
@@ -110,7 +115,8 @@
 		
 		private function dragStopFunc(e:MouseEvent):void
 		{
-			if (e.currentTarget.hitTestObject(allObjects.drop_site_mc))
+
+			if (e.currentTarget.paint_tool_mc.hitTestObject(allObjects.drop_site_mc))
 			{
 				for (var i:int = 0; i < Graphic_paintObjectsArray.length; i++)
 				{
@@ -124,8 +130,7 @@
 			else
 			{
 				e.currentTarget.stopDrag();
-				TweenMax.to(e.currentTarget, 1, {glowFilter: {color: 0xff0000, alpha: 1, blurX: 15, blurY: 15, strength: 3, delay: 1.5, remove: true}});
-				FalseFunc();
+
 				TweenLite.to(e.currentTarget, 0.5, {x: startingPosX, y: startingPosY});
 				
 			}
@@ -134,10 +139,15 @@
 		
 		private function dragStopFuncNoDrop(e:MouseEvent):void
 		{
+			if (e.currentTarget.paint_tool_mc.hitTestObject(allObjects.drop_site_mc))
+			{
+				TweenMax.to(e.currentTarget, 1, { glowFilter: { color:0xff0000, alpha:1, blurX:15, blurY:15, strength:3,delay:1.5 , remove:true }} );
+				FalseFunc();
+			}
 			e.currentTarget.stopDrag();
 			TweenLite.to(e.currentTarget, 0.5, { x: startingPosX, y: startingPosY } );
-			TweenMax.to(e.currentTarget, 1, { glowFilter: { color:0xff0000, alpha:1, blurX:15, blurY:15, strength:3,delay:1.5 , remove:true }} );
-				FalseFunc();
+			
+
 		}
 		
 		private function dropIn(e:MouseEvent):void
@@ -149,7 +159,7 @@
 				TweenLite.to(e.currentTarget, 0.5, {x: allObjects.drop_site_mc.x, y: allObjects.drop_site_mc.YposBox.y + e.currentTarget.height / 4, scaleX: 0.8, scaleY: 0.8});
 				allObjects.drop_site_mc.YposBox.y = allObjects.drop_site_mc.YposBox.y + e.currentTarget.height / 1.5
 				CorrecteFunc();
-				TweenMax.to(e.currentTarget, 1, {glowFilter: {color: 0x91e600, alpha: 1, blurX: 15, blurY: 15, strength: 3, remove: 1}});
+				TweenMax.to(e.currentTarget.paint_tool_mc, 1, {glowFilter: {color: 0x91e600, alpha: 1, blurX: 15, blurY: 15, strength: 3, remove: 1}});
 				
 			}
 			else
@@ -159,7 +169,7 @@
 				TweenLite.to(e.currentTarget, 0.5, {x: allObjects.drop_site_mc.x, y: allObjects.drop_site_mc.YposBox.y + e.currentTarget.height / 5.5});
 				allObjects.drop_site_mc.YposBox.y = allObjects.drop_site_mc.YposBox.y + e.currentTarget.height
 				CorrecteFunc();
-				TweenMax.to(e.currentTarget, 1, {glowFilter: {color: 0x91e600, alpha: 1, blurX: 15, blurY: 15, strength: 3, remove: 1}});
+				TweenMax.to(e.currentTarget.paint_tool_mc, 1, {glowFilter: {color: 0x91e600, alpha: 1, blurX: 15, blurY: 15, strength: 3, remove: 1}});
 			}
 		
 		}
