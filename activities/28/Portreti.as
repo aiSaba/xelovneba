@@ -22,10 +22,9 @@
 		private var _stageWidth:Number;
 		private var _stageHeight:Number;		
 		
-		public function Portreti(_stageWidth:Number = 1024, _stageHeight:Number = 768)
+		public function Portreti()
 		{
-			this._stageHeight = _stageHeight;
-			this._stageWidth = _stageWidth;
+			
 			addEventListener(Event.ADDED_TO_STAGE, init);
 		}
 		
@@ -37,6 +36,8 @@
 		private function YvelaferiFunc(): void
 		{
 			Igrafics = new IGrafics();
+			_stageHeight = stage.stageHeight;
+			_stageWidth = stage.stageWidth;
 			addChild(Igrafics);
 			Igrafics.x = _stageWidth / 2;
 			Igrafics.y = _stageHeight / 2 ;
@@ -49,7 +50,7 @@
 		
 		
 		
-		private function pirveliStage(_stageWidth:Number = 1024, _stageHeight:Number = 768):void
+		private function pirveliStage():void
 		{	
 			IpicsGrap = new IPicsGrap();
 			addChild(IpicsGrap);
