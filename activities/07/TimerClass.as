@@ -98,7 +98,7 @@
 		{
 			TweenMax.killTweensOf(arrow);
 		}
-		private function pauseTimer():void
+		public function pauseTimer():void
 		{
 			tween.pause();
 		}

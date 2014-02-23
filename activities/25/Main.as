@@ -20,6 +20,7 @@
 		private var old_X:Number;
 		private var old_Y:Number;
 		private var colorBox:MovieClip;
+		
 		private var randNumb:Number;
 		private var qula:int;
 		public function Main() 
@@ -36,6 +37,10 @@
 		private function initHandler():void 
 		{
 			dispatchEvent(new DataEvent(DataEvent.DATA, false, false, "ButtonVisibleTrue"));
+			Main_Mc.x = stage.stageWidth / 2;
+			Main_Mc.y = stage.stageHeight / 2;
+			Main_Mc.height = stage.stageHeight / 1.3;
+			Main_Mc.scaleX = Main_Mc.scaleY;
 			colorBox = new ColortransMove();
 			colorBox.width = colorBox.width / 2;
 			colorBox.height = colorBox.height / 2;

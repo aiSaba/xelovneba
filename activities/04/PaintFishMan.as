@@ -47,8 +47,7 @@
 			///
 			old_X = fishManPaint.closebox.x;
 			old_Y = fishManPaint.closebox.y;
-			trace(old_X);
-			trace(old_Y)
+	
 			fishManPaint.closebox.addEventListener(MouseEvent.MOUSE_DOWN, closeBoxFunc);
 			
 			fishManPaint.sky.transform.colorTransform = color;
@@ -205,7 +204,6 @@
 			}
 			if (e.currentTarget.name == "green")
 			{
-				trace("green")
 				color = new ColorTransform();
 				color.color = 0x00B32C;
 				colors();

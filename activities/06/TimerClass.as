@@ -15,7 +15,7 @@
 		private var arrow:MovieClip;
 		
 		private var durationSecond:int = 60;
-		private var tween:TweenMax ;
+		private var tween:TweenMax;
 		
 		
 		public function TimerClass() 
@@ -98,7 +98,7 @@
 		{
 			TweenMax.killTweensOf(arrow);
 		}
-		private function pauseTimer():void
+		public function pauseTimer():void
 		{
 			tween.pause();
 		}

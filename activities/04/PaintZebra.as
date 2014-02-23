@@ -184,7 +184,7 @@
 			}
 			if (e.currentTarget.name == "green")
 			{
-				trace("green")
+				
 				color = new ColorTransform();
 				color.color = 0x00B32C;
 				colors();

@@ -5,6 +5,7 @@
 	import flash.events.DataEvent;
 	import flash.events.Event;
 	import flash.events.MouseEvent;
+	import flash.filters.GlowFilter;
 	import flash.utils.setTimeout;
 	
 	public class Game extends MovieClip
@@ -17,6 +18,7 @@
 		private var PirosmaniX:Array;
 		private var timerC:TimerClass;
 		private var qula:int;
+		private var currentMovieClip:MovieClip;
 		
 		public function Game()
 		{
@@ -31,6 +33,11 @@
 		
 		private function initGame():void
 		{
+			Pirosmani_Mc.x = stage.stageWidth / 2;
+			Pirosmani_Mc.y = stage.stageHeight / 2;
+			Pikaso_Mc.x = stage.stageWidth / 2;
+			Pikaso_Mc.y = stage.stageHeight / 2;
+			
 			
 			Pirosmani_Mc.visible = false;
 			Pikaso_Mc.visible = false;
@@ -86,6 +93,7 @@
 		{
 			if (e.currentTarget.name == "pirosmani")
 			{
+				Correct(e);
 				var sound1:SoundControl = new SoundControl();
 				sound1.loadSound("correct.mp3", 1);
 				sound1.soundPlay();
@@ -93,16 +101,20 @@
 			}
 			else
 			{
+				UnCorrect(e);
 				var sound:SoundControl = new SoundControl();
 				sound.loadSound("error.mp3", 1);
 				sound.soundPlay();
 			}
 		}
 		
+		
+		
 		private function FindPikaso(e:MouseEvent):void
 		{
 			if (e.currentTarget.name == "pikaso")
 			{
+				Correct(e);
 				var sound1:SoundControl = new SoundControl();
 				sound1.loadSound("correct.mp3", 1);
 				sound1.soundPlay();
@@ -110,6 +122,7 @@
 			}
 			else
 			{
+				UnCorrect(e);
 				var sound:SoundControl = new SoundControl();
 				sound.loadSound("error.mp3", 1);
 				sound.soundPlay();
@@ -119,7 +132,6 @@
 		{
 			Pirosmani_Mc.visible = false;
 			Pikaso_Mc.visible = false;
-			back_Mc.visible = false;
 			dispatchEvent(new DataEvent(DataEvent.DATA , false , false, "ButtonVisibleFalse"));
 			qula = timerC.returnQula();
 			dispatchEvent(new DataEvent(DataEvent.DATA, false, false, "endOfGame|" + qula.toString() ));
@@ -132,6 +144,39 @@
 		public function TimerResume():void
 		{			
 			timerC.resumeTimer();				
+		}
+		
+		private function UnCorrect(e:*):void 
+		{
+			currentMovieClip = e.currentTarget;
+			var glow:GlowFilter = new GlowFilter();
+			glow.color = 0xFF0000;
+			glow.alpha = 1;
+			glow.blurX = 25;
+			glow.blurY = 25;
+			e.currentTarget.filters = [glow];
+			setTimeout(gaqroba, 500);
+		}
+
+		private function Correct(e:*):void
+		{
+			currentMovieClip = e.currentTarget;
+			var glow:GlowFilter = new GlowFilter();
+			glow.color = 0x00FF00;
+			glow.alpha = 1;
+			glow.blurX = 25;
+			glow.blurY = 25;
+			e.currentTarget.filters = [glow];
+			setTimeout(gaqroba, 500);
+		}
+		private function gaqroba():void
+		{
+			var glow:GlowFilter = new GlowFilter();
+			glow.color = 0xFF0000;
+			glow.alpha = 0;
+			glow.blurX = 0;
+			glow.blurY = 0;
+			currentMovieClip.filters = [glow];
 		}
 	
 	}

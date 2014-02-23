@@ -38,9 +38,6 @@
 		private var reliefi:Array;
 		private var reliefiText:Array;
 		
-		private var _Width:Number;
-		private var _Height:Number;
-		
 		private var index:int;
 		private var count:int;
 		private var soundControl1:SoundControl;
@@ -52,10 +49,9 @@
 		
 		
 		
-		public function Game(_Width:Number =1024, _Height:Number = 768) 
+		public function Game() 
 		{
-			this._Height = _Height;
-			this._Width = _Width;
+			
 			
 			addEventListener(Event.ADDED_TO_STAGE, init)
 			addEventListener(Event.REMOVED_FROM_STAGE, Destroy)
@@ -86,20 +82,17 @@
 		private function initHandler():void 
 		{
 			crossWord = new CrossWord();
-			crossWord.x = _Width / 2;
-			crossWord.y = _Height / 2;
-<<<<<<< HEAD
-			crossWord.height = _Height / 1.3;
-=======
-			crossWord.height = _Height / 1.2;
->>>>>>> f28bf145a40c148216b2e4f6b93dd54a9150fe76
+			crossWord.x = stage.stageWidth / 2;
+			crossWord.y = stage.stageHeight / 2;
+
+			crossWord.height = stage.stageHeight / 1.2;
 			crossWord.scaleX = crossWord.scaleY;
 			addChild(crossWord);
 			
 			dispatchEvent(new DataEvent(DataEvent.DATA, false, false, "ButtonVisibleTrue"));
 			timerC = new TimerClass();
 			addChild(timerC);
-			timerC.x = _Width - timerC.width;
+			timerC.x = stage.stageWidth - timerC.width;
 			timerC.y =  timerC.height;
 			
 			AnbaniArr = [crossWord.a, crossWord.b, crossWord.g, crossWord.d, crossWord.e, crossWord.v, crossWord.zz, crossWord.tt, crossWord.i, crossWord.k, crossWord.l, crossWord.m, crossWord.n, crossWord.o, crossWord.p, crossWord.jj, crossWord.r, crossWord.s, crossWord.t, crossWord.u, crossWord.f, crossWord.q, crossWord.rr, crossWord.yy, crossWord.ss, crossWord.cc, crossWord.c, crossWord.zzz, crossWord.w, crossWord.ww, crossWord.xx, crossWord.j, crossWord.h];
@@ -118,8 +111,8 @@
 			xazi = [crossWord.x2, crossWord.a2, crossWord.i4];
 			xaziText = [crossWord.x2.x2, crossWord.a2.a2, crossWord.i4.i4];
 			
-			palitra = [crossWord.p1, crossWord.l2, crossWord.i5, crossWord.t5,crossWord.r4, crossWord.a4];
-			palitraText = [crossWord.p1.p1, crossWord.l2.l2, crossWord.i5.i5, crossWord.t5.t5, crossWord.r4.r4, crossWord.a4.a4];
+			palitra = [crossWord.p2, crossWord.l2, crossWord.i5, crossWord.t5,crossWord.r4, crossWord.a4];
+			palitraText = [crossWord.p2.p2, crossWord.l2.l2, crossWord.i5.i5, crossWord.t5.t5, crossWord.r4.r4, crossWord.a4.a4];
 			
 			vitraji = [crossWord.i7, crossWord.r5, crossWord.a5,crossWord.f2, crossWord.i6];
 			vitrajiText = [crossWord.i7.i7, crossWord.r5.r5, crossWord.a5.a5, crossWord.f2.f2, crossWord.i6.i6];
@@ -207,12 +200,7 @@
 		}
 		private function TheEnd():void 
 		{
-<<<<<<< HEAD
-			if (count == 37)
-=======
-			
-			if (count == 41)
->>>>>>> f28bf145a40c148216b2e4f6b93dd54a9150fe76
+			if (count == 38)	
 			{
 				soundControl1 = new SoundControl();
 				addChild(soundControl1);

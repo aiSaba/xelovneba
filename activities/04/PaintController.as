@@ -5,6 +5,7 @@
 	import flash.events.DataEvent;
 	import flash.events.Event;
 	import flash.events.MouseEvent;
+	import flash.ui.Mouse;
 	
 	
 	public class PaintController extends MovieClip 
@@ -73,9 +74,10 @@
 		}
 		private function backToManu(e:DataEvent):void 
 		{
-			trace(e.data)
+			Mouse.show();
 			if (e.data == "MovrchiZebras")
 			{
+				
 				startButtons.visible = true;
 				zebraPaint.visible = false;
 				removeChild(paintZebra)
